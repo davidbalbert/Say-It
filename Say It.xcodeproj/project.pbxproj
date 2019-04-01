@@ -20,7 +20,7 @@
 		63A0C5BD2239A3C400C996DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A0C5C02239A3C400C996DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63A0C5C22239A3C400C996DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63A0C5C32239A3C400C996DD /* Say_It.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Say_It.entitlements; sourceTree = "<group>"; };
+		63A0C5C92239A4F100C996DD /* Say It.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Say It.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +53,12 @@
 		63A0C5B82239A3C200C996DD /* Say It */ = {
 			isa = PBXGroup;
 			children = (
+				63A0C5C92239A4F100C996DD /* Say It.entitlements */,
 				63A0C5B92239A3C200C996DD /* AppDelegate.swift */,
 				63A0C5BB2239A3C200C996DD /* ViewController.swift */,
 				63A0C5BD2239A3C400C996DD /* Assets.xcassets */,
 				63A0C5BF2239A3C400C996DD /* Main.storyboard */,
 				63A0C5C22239A3C400C996DD /* Info.plist */,
-				63A0C5C32239A3C400C996DD /* Say_It.entitlements */,
 			);
 			path = "Say It";
 			sourceTree = "<group>";
@@ -95,6 +95,15 @@
 				TargetAttributes = {
 					63A0C5B52239A3C200C996DD = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -271,10 +280,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Say It/Say_It.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Say It/Say It.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Say It/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -282,7 +292,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -290,10 +300,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Say It/Say_It.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Say It/Say It.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Say It/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,7 +312,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
