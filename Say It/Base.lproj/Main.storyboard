@@ -725,7 +725,7 @@
                                 </popUpButtonCell>
                             </popUpButton>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-My-xBq">
-                                <rect key="frame" x="20" y="180" width="397" height="22"/>
+                                <rect key="frame" x="20" y="180" width="440" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="Hello, I'm your computer" drawsBackground="YES" id="DYG-2I-3LL">
                                     <font key="font" metaFont="system"/>
@@ -734,7 +734,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6j2-Xl-esu">
-                                <rect key="frame" x="18" y="13" width="74" height="32"/>
+                                <rect key="frame" x="392" y="13" width="74" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Say It" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="d6q-p7-pd5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -744,10 +744,74 @@
                                     <action selector="sayIt:" target="XfG-lQ-9wD" id="mdS-zg-uDF"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sng-jC-gbi">
+                                <rect key="frame" x="18" y="127" width="36" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Rate:" id="FvM-Mi-clp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rcw-rr-vYs">
+                                <rect key="frame" x="58" y="122" width="318" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="800" doubleValue="175" tickMarkPosition="below" numberOfTickMarks="16" sliderType="linear" id="BjA-j0-V7P"/>
+                                <connections>
+                                    <action selector="updateRate:" target="XfG-lQ-9wD" id="JNn-LZ-a91"/>
+                                </connections>
+                            </slider>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bP-zT-7V4">
+                                <rect key="frame" x="382" y="125" width="44" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="XXXX" drawsBackground="YES" id="Swk-ok-PfJ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="updateRate:" target="XfG-lQ-9wD" id="M3D-Gz-uAE"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SrH-4b-tEv">
+                                <rect key="frame" x="426" y="128" width="36" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="WPM" id="92I-dM-4W6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-S1-a9g">
+                                <rect key="frame" x="226" y="13" width="166" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Say It from clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IJK-yF-cBe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sayItFromClipboard:" target="XfG-lQ-9wD" id="S7y-w2-8d4"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44z-eg-Ezi">
+                                <rect key="frame" x="157" y="13" width="69" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" inset="2" id="s1T-XJ-Xci">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stopSpeaking:" target="XfG-lQ-9wD" id="xP3-T0-4WO"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="rateSlider" destination="rcw-rr-vYs" id="cDV-tt-k1j"/>
+                        <outlet property="rateTextField" destination="0bP-zT-7V4" id="o9c-ve-Bm8"/>
                         <outlet property="sayItButton" destination="6j2-Xl-esu" id="gsK-3o-Mog"/>
+                        <outlet property="sayItFromClipboardButton" destination="3dR-S1-a9g" id="4u8-k9-XsH"/>
+                        <outlet property="stopButton" destination="44z-eg-Ezi" id="J1h-TN-24R"/>
                         <outlet property="textField" destination="g8I-My-xBq" id="3wX-RR-qWl"/>
                         <outlet property="voicesMenu" destination="rFD-4S-sqv" id="2eW-jb-kbG"/>
                     </connections>
