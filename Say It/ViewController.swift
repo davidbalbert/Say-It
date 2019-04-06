@@ -21,8 +21,8 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
     let synth = NSSpeechSynthesizer()
 
-    let minRate: Int32 = 100
-    let maxRate: Int32 = 800
+    let minRate: Int = 100
+    let maxRate: Int = 800
 
     var speaking = false {
         didSet {
@@ -46,7 +46,7 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
         }
     }
 
-    var rate: Int32! {
+    var rate: Int! {
         didSet {
             if rate < minRate {
                 rate = minRate
@@ -54,8 +54,8 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
                 rate = maxRate
             }
 
-            rateSlider.intValue = rate
-            rateTextField.intValue = rate
+            rateSlider.intValue = Int32(rate)
+            rateTextField.intValue = Int32(rate)
             synth.rate = Float(rate)
         }
     }
@@ -74,7 +74,7 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
         synth.delegate = self
 
-        rate = Int32(synth.rate)
+        rate = Defaults.rate ?? Int(synth.rate)
         rateSlider.minValue = Double(minRate)
         rateSlider.maxValue = Double(maxRate)
     }
@@ -110,7 +110,13 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     }
 
     @IBAction func updateRate(_ sender: NSControl) {
-        rate = sender.intValue
+        rate = Int(sender.intValue)
+
+        guard let event = NSApp.currentEvent else { return }
+
+        if event.type != .leftMouseDown && event.type != .leftMouseDragged {
+            Defaults.rate = rate
+        }
     }
 
     @IBAction func stopSpeaking(_ sender: Any) {
