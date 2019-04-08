@@ -26,6 +26,34 @@
 	<string>Copyright © 2019 David Albert. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSPortName</key>
+			<string>Say It</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>NSMessage</key>
+			<string>sayIt</string>
+			<key>NSRequiredContext</key>
+			<dict>
+				<key>NSServiceCategory</key>
+				<string>public.text</string>
+			</dict>
+			<key>NSKeyEquivalent</key>
+			<dict>
+				<key>default</key>
+				<string>&apos;</string>
+			</dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Speak Selected Text</string>
+			</dict>
+		</dict>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

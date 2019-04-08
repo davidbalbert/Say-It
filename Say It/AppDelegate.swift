@@ -8,19 +8,33 @@
 
 import Cocoa
 
+var appDelegate: AppDelegate!
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var speaker: Speaker!
 
+    override init() {
+        super.init()
 
+        speaker = Speaker()
+
+        appDelegate = self
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        NSApp.servicesProvider = self
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
+    @objc func sayIt(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
 
+        guard let s = pboard.string(forType: .string) else { return }
+
+        speaker.startSpeaking(s)
+    }
 }
 

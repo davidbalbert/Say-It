@@ -19,7 +19,8 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     @IBOutlet var rateSlider: NSSlider!
     @IBOutlet var rateTextField: NSTextField!
 
-    let synth = NSSpeechSynthesizer()
+    var speakerBeginId: UUID!
+    var speakerCompletionId: UUID!
 
     let minRate: Int = 100
     let maxRate: Int = 800
@@ -56,7 +57,6 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
             rateSlider.intValue = Int32(rate)
             rateTextField.intValue = Int32(rate)
-            synth.rate = Float(rate)
         }
     }
 
@@ -72,11 +72,24 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
         voicesMenu.removeAllItems()
         voicesMenu.addItems(withTitles: voiceNames())
 
-        synth.delegate = self
-
-        rate = Defaults.rate ?? Int(synth.rate)
+        rate = appDelegate.speaker.rate
         rateSlider.minValue = Double(minRate)
         rateSlider.maxValue = Double(maxRate)
+    }
+
+    override func viewWillAppear() {
+        speakerBeginId = appDelegate.speaker.addBeginHandler { [weak self] in
+            self?.speaking = true
+        }
+
+        speakerCompletionId = appDelegate.speaker.addCompletionHandler { [weak self] in
+            self?.speaking = false
+        }
+    }
+
+    override func viewWillDisappear() {
+        appDelegate.speaker.removeBeginHandler(speakerBeginId)
+        appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
     }
 
     override var representedObject: Any? {
@@ -86,8 +99,7 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     }
 
     @IBAction func sayIt(_ sender: NSButton) {
-        speaking = true
-        synth.startSpeaking(textField.stringValue)
+        appDelegate.speaker.startSpeaking(textField.stringValue)
     }
 
     @IBAction func sayItFromClipboard(_ sender: NSButton) {
@@ -101,12 +113,7 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
             return
         }
 
-        speaking = true
-        synth.startSpeaking(text)
-    }
-
-    func speechSynthesizer(_ sender: NSSpeechSynthesizer, didFinishSpeaking finishedSpeaking: Bool) {
-        speaking = false
+        appDelegate.speaker.startSpeaking(text)
     }
 
     @IBAction func updateRate(_ sender: NSControl) {
@@ -120,7 +127,7 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     }
 
     @IBAction func stopSpeaking(_ sender: Any) {
-        synth.stopSpeaking()
+        appDelegate.speaker.stopSpeaking()
     }
 }
 
