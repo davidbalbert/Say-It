@@ -129,5 +129,13 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     @IBAction func stopSpeaking(_ sender: Any) {
         appDelegate.speaker.stopSpeaking()
     }
+
+    @IBAction func toggleDockIcon(_ sender: Any) {
+        if NSApp.activationPolicy() == .regular {
+            NSApp.setActivationPolicy(.accessory)
+        } else {
+            NSApp.setActivationPolicy(.regular)
+        }
+    }
 }
 

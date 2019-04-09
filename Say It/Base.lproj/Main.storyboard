@@ -804,6 +804,17 @@
                                     <action selector="stopSpeaking:" target="XfG-lQ-9wD" id="xP3-T0-4WO"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xu1-CW-FVA">
+                                <rect key="frame" x="14" y="13" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Dock" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="auY-hV-bAG">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleDockIcon:" target="XfG-lQ-9wD" id="Dwd-wU-TEl"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
