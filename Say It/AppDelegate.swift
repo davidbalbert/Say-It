@@ -11,7 +11,7 @@ import Cocoa
 var appDelegate: AppDelegate!
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBOutlet var statusMenu: NSMenu!
     var statusItem: NSStatusItem!
 
@@ -53,6 +53,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func stopSpeaking(_ sender: Any) {
         speaker.stopSpeaking()
+    }
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if (menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking) {
+            return false
+        }
+
+        return true
     }
 }
 

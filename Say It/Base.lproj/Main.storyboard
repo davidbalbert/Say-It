@@ -686,11 +686,6 @@
                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             <connections>
                                 <action selector="stopSpeaking:" target="Voe-Tx-rLC" id="zlA-2B-uIv"/>
-                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="speaker.isSpeaking" id="4EG-BG-i6F">
-                                    <dictionary key="options">
-                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                    </dictionary>
-                                </binding>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="66i-yS-430"/>
