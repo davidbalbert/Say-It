@@ -12,18 +12,24 @@ var appDelegate: AppDelegate!
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var speaker: Speaker!
+    @IBOutlet var statusMenu: NSMenu!
+    var statusItem: NSStatusItem!
+
+    @objc var speaker: Speaker
 
     override init() {
-        super.init()
-
         speaker = Speaker()
 
+        super.init()
         appDelegate = self
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.servicesProvider = self
+
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        statusItem.menu = statusMenu
+        statusItem.button?.image = NSImage(named: "StatusIcon")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -38,9 +44,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func sayIt(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
 
-        guard let s = pboard.string(forType: .string) else { return }
+        guard let items = pboard.pasteboardItems else { return }
+        guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.text")]) else { return }
+        guard let s = items[0].string(forType: type) else { return }
 
         speaker.startSpeaking(s)
+    }
+
+    @IBAction func stopSpeaking(_ sender: Any) {
+        speaker.stopSpeaking()
     }
 }
 

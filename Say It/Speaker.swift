@@ -22,6 +22,10 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
         }
     }
 
+    @objc var isSpeaking: Bool {
+        return synth.isSpeaking
+    }
+
     override init() {
         super.init()
 
