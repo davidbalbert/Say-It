@@ -14,6 +14,7 @@ var appDelegate: AppDelegate!
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBOutlet var statusMenu: NSMenu!
     var statusItem: NSStatusItem!
+    var stopSpeakingShortcut: GlobalKeyboardShortcut!
 
     @objc var speaker: Speaker
 
@@ -30,6 +31,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.menu = statusMenu
         statusItem.button?.image = NSImage(named: "StatusIcon")
+
+        stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { shortcut in
+            if self.speaker.isSpeaking {
+                self.stopSpeaking(nil)
+                self.statusItem.button?.highlight(true)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.statusItem.button?.highlight(false)
+                }
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -51,8 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         speaker.startSpeaking(s)
     }
 
-    @IBAction func stopSpeaking(_ sender: Any) {
+    @IBAction func stopSpeaking(_ sender: Any?) {
         speaker.stopSpeaking()
+
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
