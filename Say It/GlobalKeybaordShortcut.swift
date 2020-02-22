@@ -9,7 +9,7 @@
 import Carbon
 
 extension FourCharCode {
-    static func from(_ s: String) -> FourCharCode? {
+    static func from(string s: String) -> FourCharCode? {
         if s.count != 4 || s.lengthOfBytes(using: .utf8) != 4 {
             return nil
         }
@@ -132,7 +132,7 @@ class GlobalKeyboardShortcut {
         self.modifiers = modifiers
         self.handler = handler
 
-        id = EventHotKeyID(signature: FourCharCode.from("GKSs")!, id: GlobalKeyboardShortcut.nextId)
+        id = EventHotKeyID(signature: FourCharCode.from(string: "GKSs")!, id: GlobalKeyboardShortcut.nextId)
 
         GlobalKeyboardShortcut.nextId += 1
 

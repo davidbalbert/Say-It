@@ -13,6 +13,7 @@ var appDelegate: AppDelegate!
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBOutlet var statusMenu: NSMenu!
+    var preferenceWindowController: NSWindowController!
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
 
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.servicesProvider = self
+
+        self.preferenceWindowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "Preferences") as? NSWindowController
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.menu = statusMenu
@@ -66,6 +69,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBAction func stopSpeaking(_ sender: Any?) {
         speaker.stopSpeaking()
 
+    }
+
+    @IBAction func showPreferences(_ sender: Any) {
+        preferenceWindowController.window?.center()
+        preferenceWindowController.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
