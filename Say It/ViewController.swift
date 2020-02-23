@@ -133,8 +133,10 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
     @IBAction func toggleDockIcon(_ sender: Any) {
         if NSApp.activationPolicy() == .regular {
             NSApp.setActivationPolicy(.accessory)
+            Defaults.showDock = false
         } else {
             NSApp.setActivationPolicy(.regular)
+            Defaults.showDock = true
         }
     }
 }

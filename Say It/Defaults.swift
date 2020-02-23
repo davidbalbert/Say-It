@@ -20,4 +20,14 @@ struct Defaults {
             UserDefaults.standard.set(newValue, forKey: "rate")
         }
     }
+
+    static var showDock: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "showDock")
+        }
+
+        set {
+            UserDefaults.standard.set(newValue, forKey: "showDock")
+        }
+    }
 }
