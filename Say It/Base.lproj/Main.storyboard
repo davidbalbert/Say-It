@@ -229,21 +229,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFD-4S-sqv">
-                                <rect key="frame" x="18" y="226" width="77" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="YQs-zA-T1H" id="bce-3X-zqr">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <menu key="menu" id="AGL-yO-ftu">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="YQs-zA-T1H"/>
-                                            <menuItem title="Item 2" id="j9v-WQ-cJd"/>
-                                            <menuItem title="Item 3" id="iRy-8m-Lht"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-My-xBq">
                                 <rect key="frame" x="20" y="180" width="440" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -344,7 +329,6 @@
                         <outlet property="sayItFromClipboardButton" destination="3dR-S1-a9g" id="4u8-k9-XsH"/>
                         <outlet property="stopButton" destination="44z-eg-Ezi" id="J1h-TN-24R"/>
                         <outlet property="textField" destination="g8I-My-xBq" id="3wX-RR-qWl"/>
-                        <outlet property="voicesMenu" destination="rFD-4S-sqv" id="2eW-jb-kbG"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

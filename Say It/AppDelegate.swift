@@ -56,7 +56,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        preferenceWindowController.window?.makeKeyAndOrderFront(self)
+        preferenceWindowController.window?.center()
+        preferenceWindowController.showWindow(self)
 
         return false
     }

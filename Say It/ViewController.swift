@@ -10,7 +10,6 @@ import Cocoa
 
 class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
-    @IBOutlet var voicesMenu: NSPopUpButton!
     @IBOutlet var textField: NSTextField!
     @IBOutlet var sayItButton: NSButton!
     @IBOutlet var sayItFromClipboardButton: NSButton!
@@ -60,17 +59,8 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
         }
     }
 
-    func voiceNames() -> [String] {
-        return NSSpeechSynthesizer.availableVoices.map { voice in
-            NSSpeechSynthesizer.attributes(forVoice: voice)[.name] as! String
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        voicesMenu.removeAllItems()
-        voicesMenu.addItems(withTitles: voiceNames())
 
         rate = appDelegate.speaker.rate
         rateSlider.minValue = Double(minRate)
@@ -132,11 +122,11 @@ class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
     @IBAction func toggleDockIcon(_ sender: Any) {
         if NSApp.activationPolicy() == .regular {
-            NSApp.setActivationPolicy(.accessory)
             Defaults.showDock = false
+            NSApp.setActivationPolicy(.accessory)
         } else {
-            NSApp.setActivationPolicy(.regular)
             Defaults.showDock = true
+            NSApp.setActivationPolicy(.regular)
         }
     }
 }
