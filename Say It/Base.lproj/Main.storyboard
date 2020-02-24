@@ -22,7 +22,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferences:" target="Voe-Tx-rLC" id="Zi2-f9-MeU"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -185,7 +189,7 @@
                         <menuItem title="Preferences…" id="Wox-1b-e9N">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="showPreferences:" target="Voe-Tx-rLC" id="k9m-RU-O9M"/>
+                                <action selector="showPreferences:" target="Voe-Tx-rLC" id="vOb-Cf-x65"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Quit" id="T6e-Ww-BuS">
@@ -198,33 +202,33 @@
                 </menu>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="-27"/>
+            <point key="canvasLocation" x="76" y="-413"/>
         </scene>
         <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
+        <scene sceneID="6M1-5Z-gOl">
             <objects>
-                <windowController storyboardIdentifier="Preferences" showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Say It" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                <windowController storyboardIdentifier="Preferences" id="qz1-p4-4iB" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="16H-fn-aYo">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
+                            <outlet property="delegate" destination="qz1-p4-4iB" id="C8O-vy-mWC"/>
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="7v9-MM-lDm" kind="relationship" relationship="window.shadowedContentViewController" id="Jwg-Gu-nj3"/>
                     </connections>
                 </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="1bw-M4-MFa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="-149"/>
         </scene>
-        <!--View Controller-->
+        <!--General-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="General" id="XfG-lQ-9wD" customClass="GeneralPreferencesViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -333,7 +337,49 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-142" y="834"/>
+        </scene>
+        <!--Pronounciations-->
+        <scene sceneID="Xqx-hT-WrE">
+            <objects>
+                <viewController title="Pronounciations" id="vmv-sm-lge" sceneMemberID="viewController">
+                    <view key="view" id="tmr-ia-fc9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="oik-j4-Bau" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="418" y="849"/>
+        </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="yn2-zF-EKf">
+            <objects>
+                <tabViewController tabStyle="toolbar" id="7v9-MM-lDm" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem image="NSPreferencesGeneral" id="Y0F-UO-PsE"/>
+                        <tabViewItem id="Ggv-dB-mNx"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="boC-mg-B5r">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <outlet property="delegate" destination="7v9-MM-lDm" id="GlC-c2-vau"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="boC-mg-B5r" id="BwY-98-UKr"/>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="tabItems" id="5YK-ec-4Ki"/>
+                        <segue destination="vmv-sm-lge" kind="relationship" relationship="tabItems" id="3Qx-u3-PGr"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="iId-95-wap" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="298"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
 </document>

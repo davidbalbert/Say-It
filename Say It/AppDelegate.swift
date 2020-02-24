@@ -13,7 +13,7 @@ var appDelegate: AppDelegate!
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBOutlet var statusMenu: NSMenu!
-    var preferenceWindowController: NSWindowController!
+    var windowController: NSWindowController!
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
 
@@ -29,11 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.servicesProvider = self
 
-        if Defaults.showDock && NSApp.activationPolicy() != .regular {
-            NSApp.setActivationPolicy(.regular)
+        if !Defaults.showDock && NSApp.activationPolicy() != .accessory {
+            NSApp.setActivationPolicy(.accessory)
         }
 
-        self.preferenceWindowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "Preferences") as? NSWindowController
+        windowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(identifier: "Preferences")
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.menu = statusMenu
@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
                 self.stopSpeaking(nil)
                 self.statusItem.button?.highlight(true)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.statusItem.button?.highlight(false)
                 }
             }
@@ -56,8 +56,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        preferenceWindowController.window?.center()
-        preferenceWindowController.showWindow(self)
+        windowController.window?.center()
+        windowController.showWindow(self)
 
         return false
     }
@@ -77,8 +77,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     @IBAction func showPreferences(_ sender: Any) {
-        preferenceWindowController.window?.center()
-        preferenceWindowController.showWindow(self)
+        windowController.window?.center()
+        windowController.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
     }
 

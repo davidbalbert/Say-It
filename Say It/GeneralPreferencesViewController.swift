@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSSpeechSynthesizerDelegate {
+class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
     @IBOutlet var textField: NSTextField!
     @IBOutlet var sayItButton: NSButton!
