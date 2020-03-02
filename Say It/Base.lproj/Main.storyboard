@@ -207,8 +207,8 @@
         <!--Window Controller-->
         <scene sceneID="6M1-5Z-gOl">
             <objects>
-                <windowController storyboardIdentifier="Preferences" id="qz1-p4-4iB" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="16H-fn-aYo">
+                <windowController storyboardIdentifier="Preferences" id="qz1-p4-4iB" customClass="PreferencesWindowController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="16H-fn-aYo">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -352,10 +352,10 @@
             </objects>
             <point key="canvasLocation" x="418" y="849"/>
         </scene>
-        <!--Tab View Controller-->
+        <!--Preferences Tab View Controller-->
         <scene sceneID="yn2-zF-EKf">
             <objects>
-                <tabViewController tabStyle="toolbar" id="7v9-MM-lDm" sceneMemberID="viewController">
+                <tabViewController tabStyle="toolbar" id="7v9-MM-lDm" customClass="PreferencesTabViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem image="NSPreferencesGeneral" id="Y0F-UO-PsE"/>
                         <tabViewItem id="Ggv-dB-mNx"/>
