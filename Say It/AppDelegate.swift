@@ -64,6 +64,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
     @objc func sayIt(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
 
+        NSWorkspace.shared.menuBarOwningApplication?.activate()
+
         guard let items = pboard.pasteboardItems else { return }
         guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.text")]) else { return }
         guard let s = items[0].string(forType: type) else { return }
