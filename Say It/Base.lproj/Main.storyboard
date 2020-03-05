@@ -136,6 +136,13 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="vrD-Ky-9bh"/>
+                                        <menuItem title="Transcript" keyEquivalent="0" id="lfF-T7-uTq">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="rgy-6J-eJs"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -176,6 +183,13 @@
                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             <connections>
                                 <action selector="stopSpeaking:" target="Voe-Tx-rLC" id="zlA-2B-uIv"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="x5O-FE-a7p"/>
+                        <menuItem title="Show Transcript" id="RkF-uP-bwx">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="vPt-yt-MNt"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="66i-yS-430"/>
@@ -224,6 +238,77 @@
                 <customObject id="1bw-M4-MFa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="-149"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Shp-pV-s48">
+            <objects>
+                <windowController storyboardIdentifier="Transcript" showSeguePresentationStyle="single" id="7vA-mq-GnP" sceneMemberID="viewController">
+                    <window key="window" title="Transcript" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ziI-B9-gZt">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <connections>
+                            <outlet property="delegate" destination="7vA-mq-GnP" id="BGv-nT-f5I"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="z44-kt-w7O" kind="relationship" relationship="window.shadowedContentViewController" id="6AF-ZU-e0I"/>
+                    </connections>
+                </windowController>
+                <customObject id="Ry7-jH-Imc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="756" y="-152"/>
+        </scene>
+        <!--Transcript Controller-->
+        <scene sceneID="hDF-hk-Hxi">
+            <objects>
+                <viewController id="z44-kt-w7O" customClass="TranscriptController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="4VE-kR-csB">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="329"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMq-BI-R8W">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="329"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="3D1-so-RML">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="329"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="pq4-9p-i2W">
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="329"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="480" height="329"/>
+                                            <size key="maxSize" width="480" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="YNG-w4-RZk">
+                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="CMV-lf-ZW2">
+                                    <rect key="frame" x="464" y="0.0" width="16" height="329"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NMq-BI-R8W" secondAttribute="trailing" id="7PM-cS-5FH"/>
+                            <constraint firstAttribute="bottom" secondItem="NMq-BI-R8W" secondAttribute="bottom" id="Gdx-qF-A8V"/>
+                            <constraint firstItem="NMq-BI-R8W" firstAttribute="top" secondItem="4VE-kR-csB" secondAttribute="top" id="RWQ-XE-DbT"/>
+                            <constraint firstItem="NMq-BI-R8W" firstAttribute="leading" secondItem="4VE-kR-csB" secondAttribute="leading" id="ixN-4m-0eq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="pq4-9p-i2W" id="zMn-xs-ggt"/>
+                    </connections>
+                </viewController>
+                <customObject id="4aA-VH-xzB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="756" y="312.5"/>
         </scene>
         <!--General-->
         <scene sceneID="hIz-AP-VOD">

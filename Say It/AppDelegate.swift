@@ -13,9 +13,16 @@ var appDelegate: AppDelegate!
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @IBOutlet var statusMenu: NSMenu!
-    var windowController: NSWindowController!
+    var preferencesWindowController: NSWindowController!
+    var transcriptWindowController: NSWindowController!
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
+
+    var log: [String] = [] {
+        didSet {
+            (transcriptWindowController?.contentViewController as! TranscriptController).log = log
+        }
+    }
 
     @objc var speaker: Speaker
 
@@ -33,7 +40,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
             NSApp.setActivationPolicy(.accessory)
         }
 
-        windowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(identifier: "Preferences")
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+
+        preferencesWindowController = storyboard.instantiateController(identifier: "Preferences")
+        transcriptWindowController = storyboard.instantiateController(identifier: "Transcript")
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.menu = statusMenu
@@ -56,8 +66,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        windowController.window?.center()
-        windowController.showWindow(self)
+        preferencesWindowController.window?.center()
+        preferencesWindowController.showWindow(self)
 
         return false
     }
@@ -70,6 +80,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.text")]) else { return }
         guard let s = items[0].string(forType: type) else { return }
 
+        log.append(s.trimmingCharacters(in: .whitespacesAndNewlines))
+
         speaker.startSpeaking(s)
     }
 
@@ -79,8 +91,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     @IBAction func showPreferences(_ sender: Any) {
-        windowController.window?.center()
-        windowController.showWindow(self)
+        preferencesWindowController.window?.center()
+        preferencesWindowController.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    @IBAction func showTranscript(_ sender: Any) {
+        transcriptWindowController.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
     }
 

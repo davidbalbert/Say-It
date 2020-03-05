@@ -15,6 +15,7 @@
 		63A0C5BC2239A3C200C996DD /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A0C5BB2239A3C200C996DD /* GeneralPreferencesViewController.swift */; };
 		63A0C5BE2239A3C400C996DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A0C5BD2239A3C400C996DD /* Assets.xcassets */; };
 		63A0C5C12239A3C400C996DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63A0C5BF2239A3C400C996DD /* Main.storyboard */; };
+		63A485582411441C00CBCAFB /* TranscriptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A485572411441C00CBCAFB /* TranscriptController.swift */; };
 		63BC967623F0E71D00FDED0B /* GlobalKeybaordShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		63A0C5C02239A3C400C996DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63A0C5C22239A3C400C996DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A0C5C92239A4F100C996DD /* Say It.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Say It.entitlements"; sourceTree = "<group>"; };
+		63A485572411441C00CBCAFB /* TranscriptController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptController.swift; sourceTree = "<group>"; };
 		63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybaordShortcut.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +67,7 @@
 			children = (
 				63A0C5C92239A4F100C996DD /* Say It.entitlements */,
 				63A0C5B92239A3C200C996DD /* AppDelegate.swift */,
+				63A485572411441C00CBCAFB /* TranscriptController.swift */,
 				6350194D225A4DB600D5D1F4 /* Speaker.swift */,
 				63A0C5BB2239A3C200C996DD /* GeneralPreferencesViewController.swift */,
 				63A0C5BD2239A3C400C996DD /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 				630C33BF240D519700B18813 /* PreferencesTabViewController.swift in Sources */,
 				63BC967623F0E71D00FDED0B /* GlobalKeybaordShortcut.swift in Sources */,
 				6327CDD622593C27006A73EF /* Defaults.swift in Sources */,
+				63A485582411441C00CBCAFB /* TranscriptController.swift in Sources */,
 				63A0C5BC2239A3C200C996DD /* GeneralPreferencesViewController.swift in Sources */,
 				630C33C3240D55CE00B18813 /* PreferencesWindowController.swift in Sources */,
 				63A0C5BA2239A3C200C996DD /* AppDelegate.swift in Sources */,
