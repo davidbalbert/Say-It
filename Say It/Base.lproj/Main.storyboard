@@ -290,17 +290,17 @@
             <objects>
                 <viewController id="s3x-aS-GGM" customClass="TranscriptTableViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dYM-mU-FDM">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIK-wf-3u3">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
                                 <clipView key="contentView" drawsBackground="NO" id="e32-8D-W9m">
-                                    <rect key="frame" x="1" y="0.0" width="448" height="299"/>
+                                    <rect key="frame" x="1" y="0.0" width="448" height="171"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="4q7-OV-A3D" viewBased="YES" id="98p-QR-qKs">
-                                            <rect key="frame" x="0.0" y="0.0" width="448" height="274"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="146"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -308,7 +308,7 @@
                                             <tableColumns>
                                                 <tableColumn width="109" minWidth="10" maxWidth="3.4028234663852886e+38" id="ePW-p5-Agc">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Timestamp">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </tableHeaderCell>
@@ -342,7 +342,7 @@
                                                 </tableColumn>
                                                 <tableColumn width="333" minWidth="40" maxWidth="1000" id="Mut-fW-bAz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Text">
-                                                        <font key="font" metaFont="label" size="11"/>
+                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -383,7 +383,7 @@
                                     <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="VNM-0F-Gpc">
-                                    <rect key="frame" x="1" y="283" width="448" height="16"/>
+                                    <rect key="frame" x="1" y="241" width="422" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bma-2n-tAM">
@@ -409,7 +409,7 @@
                 </viewController>
                 <customObject id="eJO-1B-UQd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428" y="92"/>
+            <point key="canvasLocation" x="1428" y="137"/>
         </scene>
         <!--Transcript Detail View Controller-->
         <scene sceneID="gyf-Nx-9Hm">
