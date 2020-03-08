@@ -17,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     var transcriptWindowController: NSWindowController!
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
+    var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -59,6 +60,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
                 }
             }
         }
+
+        sayItFromClipboardShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .control]) { shortcut in
+            if self.canSayItFromClipboard() {
+                self.sayItFromClipboard(nil)
+                self.statusItem.button?.highlight(true)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.statusItem.button?.highlight(false)
+                }
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -72,12 +84,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         return false
     }
 
+    func canSayItFromClipboard() -> Bool {
+        guard let items = NSPasteboard.general.pasteboardItems else { return false }
+        let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")])
+
+        return type != nil
+    }
+
+    @IBAction func sayItFromClipboard(_ sender: Any?) {
+        var error: NSString?
+
+        sayIt(NSPasteboard.general, userData: nil, error: &error)
+    }
+
     @objc func sayIt(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
 
         NSWorkspace.shared.menuBarOwningApplication?.activate()
 
         guard let items = pboard.pasteboardItems else { return }
-        guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.text")]) else { return }
+        guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")]) else { return }
+
         guard let s = items[0].string(forType: type) else { return }
 
         log.append(TranscriptEntry(date: Date(), text: s.trimmingCharacters(in: .whitespacesAndNewlines)))
@@ -107,8 +133,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if (menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking) {
+        if menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking {
             return false
+        } else if menuItem.action == #selector(AppDelegate.sayItFromClipboard(_:)) {
+            return canSayItFromClipboard()
         }
 
         return true

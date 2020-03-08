@@ -185,6 +185,12 @@
                                 <action selector="stopSpeaking:" target="Voe-Tx-rLC" id="zlA-2B-uIv"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Say It From Clipboard" keyEquivalent="'" id="bvN-t4-lad">
+                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            <connections>
+                                <action selector="sayItFromClipboard:" target="Voe-Tx-rLC" id="hPT-Oi-LPK"/>
+                            </connections>
+                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="x5O-FE-a7p"/>
                         <menuItem title="About Say It" id="XD6-94-L3G">
                             <modifierMask key="keyEquivalentModifierMask"/>
