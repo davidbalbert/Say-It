@@ -18,9 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
 
-    var log: [String] = [] {
+    var log: [TranscriptEntry] = [] {
         didSet {
-            (transcriptWindowController?.contentViewController as! TranscriptController).log = log
+            (transcriptWindowController?.contentViewController as! TranscriptViewController).log = log
         }
     }
 
@@ -80,7 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.text")]) else { return }
         guard let s = items[0].string(forType: type) else { return }
 
-        log.append(s.trimmingCharacters(in: .whitespacesAndNewlines))
+        log.append(TranscriptEntry(date: Date(), text: s.trimmingCharacters(in: .whitespacesAndNewlines)))
 
         speaker.startSpeaking(s)
     }
