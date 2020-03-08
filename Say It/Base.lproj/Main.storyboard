@@ -186,13 +186,6 @@
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="x5O-FE-a7p"/>
-                        <menuItem title="Show Transcript" id="RkF-uP-bwx">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="vPt-yt-MNt"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem isSeparatorItem="YES" id="66i-yS-430"/>
                         <menuItem title="About Say It" id="XD6-94-L3G">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -200,6 +193,12 @@
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="e1y-mt-0gl"/>
+                        <menuItem title="Show Transcript" hidden="YES" id="RkF-uP-bwx">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="vPt-yt-MNt"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="Preferences…" id="Wox-1b-e9N">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -213,7 +212,15 @@
                             </connections>
                         </menuItem>
                     </items>
+                    <connections>
+                        <outlet property="delegate" destination="NrK-qa-xoh" id="dT1-Xe-Zoe"/>
+                    </connections>
                 </menu>
+                <customObject id="NrK-qa-xoh" customClass="StatusMenuDelegate" customModule="Say_It" customModuleProvider="target">
+                    <connections>
+                        <outlet property="transcriptMenuItem" destination="RkF-uP-bwx" id="nm7-H8-3ME"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76" y="-413"/>
@@ -308,7 +315,7 @@
                                             <tableColumns>
                                                 <tableColumn width="109" minWidth="10" maxWidth="3.4028234663852886e+38" id="ePW-p5-Agc">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Timestamp">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </tableHeaderCell>
@@ -342,7 +349,7 @@
                                                 </tableColumn>
                                                 <tableColumn width="333" minWidth="40" maxWidth="1000" id="Mut-fW-bAz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Text">
-                                                        <font key="font" metaFont="controlContent" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
