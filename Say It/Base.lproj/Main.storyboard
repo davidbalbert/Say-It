@@ -189,7 +189,7 @@
                         <menuItem title="About Say It" id="XD6-94-L3G">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="7f5-RQ-XDU"/>
+                                <action selector="orderFrontStandardAboutPanel:" target="Voe-Tx-rLC" id="NEr-IB-6uR"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="e1y-mt-0gl"/>

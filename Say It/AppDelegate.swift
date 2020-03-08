@@ -101,6 +101,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         NSApp.activate(ignoringOtherApps: true)
     }
 
+    @IBAction func orderFrontStandardAboutPanel(_ sender: Any) {
+        NSApp.orderFrontStandardAboutPanel(sender)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if (menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking) {
             return false
