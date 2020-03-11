@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import os.log
 
 struct Pronounciation {
     var from: String
@@ -67,18 +68,36 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
     }
 
     @IBAction func updateFrom(_ sender: NSTextField) {
-        print("updateFrom \(sender.stringValue)")
+        if selection.count > 1 {
+            os_log("updateFrom called with multiple rows selected [%@]", log: .default, type: .error, Array(selection).map { String($0) }.joined(separator: ", "))
+            return
+        }
+
+        let row = tableView.selectedRow
+
+        pronounciations[row].from = sender.stringValue
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
-        print("updateTo \(sender.stringValue)")
+        if selection.count > 1 {
+            os_log("updateTo called with multiple rows selected [%@]", log: .default, type: .error, Array(selection).map { String($0) }.joined(separator: ", "))
+            return
+        }
+
+        let row = tableView.selectedRow
+
+        pronounciations[row].to = sender.stringValue
     }
 
     @IBAction func addOrRemoveRow(_ sender: Any) {
         if addRemove.isSelected(forSegment: 0) {
             print("add")
         } else {
-            print("remove")
+            tableView.removeRows(at: selection, withAnimation: .slideUp)
+
+            let a = NSMutableArray(array: pronounciations)
+            a.removeObjects(at: selection)
+            pronounciations = a as NSArray as! [Pronounciation]
         }
     }
 }
