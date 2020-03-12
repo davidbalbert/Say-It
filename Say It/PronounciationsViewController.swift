@@ -9,7 +9,7 @@
 import Cocoa
 import os.log
 
-struct Pronounciation {
+struct Pronounciation : Equatable {
     var from: String
     var to: String
 }
@@ -91,13 +91,21 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
 
     @IBAction func addOrRemoveRow(_ sender: Any) {
         if addRemove.isSelected(forSegment: 0) {
-            print("add")
+            if (pronounciations.isEmpty || pronounciations.last! != Pronounciation(from: "", to: "")) {
+                pronounciations.append(Pronounciation(from: "", to: ""))
+                tableView.insertRows(at: IndexSet(integer: pronounciations.count-1))
+            }
+
+            tableView.selectRowIndexes(IndexSet(integer: pronounciations.count-1), byExtendingSelection: false)
         } else {
-            tableView.removeRows(at: selection, withAnimation: .slideUp)
+            let s = selection
 
             let a = NSMutableArray(array: pronounciations)
-            a.removeObjects(at: selection)
+            a.removeObjects(at: s)
             pronounciations = a as NSArray as! [Pronounciation]
+
+            tableView.removeRows(at: s)
+            tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
         }
     }
 }
