@@ -69,11 +69,6 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
     }
 
     @IBAction func updateFrom(_ sender: NSTextField) {
-        if selection.count > 1 {
-            os_log("updateFrom called with multiple rows selected [%@]", log: .default, type: .error, Array(selection).map { String($0) }.joined(separator: ", "))
-            return
-        }
-
         if justDeleted {
             return
         }
@@ -84,15 +79,9 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
-        if selection.count > 1 {
-            os_log("updateTo called with multiple rows selected [%@]", log: .default, type: .error, Array(selection).map { String($0) }.joined(separator: ", "))
-            return
-        }
-
         if justDeleted {
             return
         }
-
 
         let row = tableView.selectedRow
 
