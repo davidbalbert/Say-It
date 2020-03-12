@@ -17,6 +17,7 @@ struct Pronounciation : Equatable {
 class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var addRemove: NSSegmentedControl!
+    var justDeleted = false
 
     var selection = IndexSet() {
         didSet {
@@ -73,6 +74,10 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
             return
         }
 
+        if justDeleted {
+            return
+        }
+
         let row = tableView.selectedRow
 
         pronounciations[row].from = sender.stringValue
@@ -83,6 +88,11 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
             os_log("updateTo called with multiple rows selected [%@]", log: .default, type: .error, Array(selection).map { String($0) }.joined(separator: ", "))
             return
         }
+
+        if justDeleted {
+            return
+        }
+
 
         let row = tableView.selectedRow
 
@@ -97,6 +107,8 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
             }
 
             tableView.selectRowIndexes(IndexSet(integer: pronounciations.count-1), byExtendingSelection: false)
+
+            // TODO: edit first column
         } else {
             let s = selection
 
@@ -104,8 +116,14 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
             a.removeObjects(at: s)
             pronounciations = a as NSArray as! [Pronounciation]
 
+            // HACK: make sure we ignore the text view action that gets fired when we delete a row
+            // while we're editing a cell.
+            justDeleted = true
+
             tableView.removeRows(at: s)
             tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
+
+            justDeleted = false
         }
     }
 }
