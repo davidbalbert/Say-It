@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
     var log: [TranscriptEntry] = [] {
         didSet {
-            (transcriptWindowController?.contentViewController as! TranscriptViewController).log = log
+            (transcriptWindowController.contentViewController as! TranscriptViewController).log = log
         }
     }
 

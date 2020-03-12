@@ -9,11 +9,6 @@
 import Cocoa
 import os.log
 
-struct Pronounciation : Equatable {
-    var from: String
-    var to: String
-}
-
 class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var addRemove: NSSegmentedControl!
@@ -29,19 +24,17 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
         }
     }
 
-    var pronounciations: [Pronounciation] = [Pronounciation(from: "Foo", to: "Bar"), Pronounciation(from: "Baz", to: "Qux")]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        pronounciations.count
+        Defaults.pronunciations.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let p = pronounciations[row]
+        let p = Defaults.pronunciations[row]
         let identifier: String
         let value: String
 
@@ -75,7 +68,9 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
 
         let row = tableView.selectedRow
 
-        pronounciations[row].from = sender.stringValue
+        var ps = Defaults.pronunciations
+        ps[row].from = sender.stringValue
+        Defaults.pronunciations = ps
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
@@ -85,27 +80,33 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
 
         let row = tableView.selectedRow
 
-        pronounciations[row].to = sender.stringValue
+        var ps = Defaults.pronunciations
+        ps[row].to = sender.stringValue
+        Defaults.pronunciations = ps
     }
 
     @IBAction func addOrRemoveRow(_ sender: Any) {
         if addRemove.isSelected(forSegment: 0) {
-            if (pronounciations.isEmpty || pronounciations.last! != Pronounciation(from: "", to: "")) {
-                pronounciations.append(Pronounciation(from: "", to: ""))
-                tableView.insertRows(at: IndexSet(integer: pronounciations.count-1))
+            var ps = Defaults.pronunciations
+
+            if (ps.isEmpty || ps.last! != Pronounciation(from: "", to: "")) {
+                ps.append(Pronounciation(from: "", to: ""))
+                Defaults.pronunciations = ps
+
+                tableView.insertRows(at: IndexSet(integer: ps.count-1))
             }
 
-            tableView.selectRowIndexes(IndexSet(integer: pronounciations.count-1), byExtendingSelection: false)
+            tableView.selectRowIndexes(IndexSet(integer: ps.count-1), byExtendingSelection: false)
 
-            let cell = tableView.rowView(atRow: pronounciations.count-1, makeIfNecessary: false)!.view(atColumn: 0) as! NSTableCellView
+            let cell = tableView.rowView(atRow: ps.count-1, makeIfNecessary: false)!.view(atColumn: 0) as! NSTableCellView
 
             cell.textField?.becomeFirstResponder()
         } else {
             let s = selection
 
-            let a = NSMutableArray(array: pronounciations)
+            let a = NSMutableArray(array: Defaults.pronunciations)
             a.removeObjects(at: s)
-            pronounciations = a as NSArray as! [Pronounciation]
+            Defaults.pronunciations = a as NSArray as! [Pronounciation]
 
             // HACK: make sure we ignore the text view action that gets fired when we delete a row
             // while we're editing a cell.

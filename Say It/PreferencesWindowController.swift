@@ -17,5 +17,4 @@ class PreferencesWindowController: NSWindowController {
 
         (contentViewController as! PreferencesTabViewController).setWindowTitle()
     }
-
 }

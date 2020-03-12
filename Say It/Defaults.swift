@@ -30,4 +30,29 @@ struct Defaults {
             UserDefaults.standard.set(newValue, forKey: "showDock")
         }
     }
+
+
+    private static var _pronunciations: [Pronounciation]?
+
+    static var pronunciations: [Pronounciation] {
+        get {
+            if let _pronunciations = _pronunciations {
+                return _pronunciations
+            }
+
+            guard let data = UserDefaults.standard.value(forKey:"pronunciations") as? Data else {
+                return []
+            }
+
+            let r = (try? PropertyListDecoder().decode([Pronounciation].self, from: data)) ?? []
+            _pronunciations = r
+
+            return r
+        }
+
+        set {
+            _pronunciations = newValue
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(newValue), forKey: "pronunciations")
+        }
+    }
 }
