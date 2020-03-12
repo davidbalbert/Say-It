@@ -108,7 +108,9 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
 
             tableView.selectRowIndexes(IndexSet(integer: pronounciations.count-1), byExtendingSelection: false)
 
-            // TODO: edit first column
+            let cell = tableView.rowView(atRow: pronounciations.count-1, makeIfNecessary: false)!.view(atColumn: 0) as! NSTableCellView
+
+            cell.textField?.becomeFirstResponder()
         } else {
             let s = selection
 
