@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		630C33BF240D519700B18813 /* PreferencesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C33BE240D519700B18813 /* PreferencesTabViewController.swift */; };
+		630C33BF240D519700B18813 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C33BE240D519700B18813 /* PreferencesViewController.swift */; };
 		630C33C3240D55CE00B18813 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C33C2240D55CE00B18813 /* PreferencesWindowController.swift */; };
 		63275D422413D8EA008F0992 /* TranscriptTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63275D412413D8EA008F0992 /* TranscriptTableViewController.swift */; };
 		63275D452413D965008F0992 /* TranscriptDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63275D432413D965008F0992 /* TranscriptDetailViewController.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		630C33BE240D519700B18813 /* PreferencesTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTabViewController.swift; sourceTree = "<group>"; };
+		630C33BE240D519700B18813 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		630C33C2240D55CE00B18813 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		63275D412413D8EA008F0992 /* TranscriptTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptTableViewController.swift; sourceTree = "<group>"; };
 		63275D432413D965008F0992 /* TranscriptDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptDetailViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 				63A0C5BF2239A3C400C996DD /* Main.storyboard */,
 				63360B8C241FC59100A84D86 /* Pronunciation.swift */,
 				636A08562414856C005639DC /* PronunciationsViewController.swift */,
-				630C33BE240D519700B18813 /* PreferencesTabViewController.swift */,
+				630C33BE240D519700B18813 /* PreferencesViewController.swift */,
 				630C33C2240D55CE00B18813 /* PreferencesWindowController.swift */,
 				63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */,
 				6327CDD522593C27006A73EF /* Defaults.swift */,
@@ -178,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630C33BF240D519700B18813 /* PreferencesTabViewController.swift in Sources */,
+				630C33BF240D519700B18813 /* PreferencesViewController.swift in Sources */,
 				63275D482414689F008F0992 /* TranscriptEntry.swift in Sources */,
 				63BC967623F0E71D00FDED0B /* GlobalKeybaordShortcut.swift in Sources */,
 				636A085524147607005639DC /* StatusMenuDelegate.swift in Sources */,

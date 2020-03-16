@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PreferencesTabViewController: NSTabViewController {
+class PreferencesViewController: NSTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
