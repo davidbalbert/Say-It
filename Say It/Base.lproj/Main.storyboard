@@ -188,7 +188,7 @@
                         <menuItem title="Say It From Clipboard" keyEquivalent="'" id="bvN-t4-lad">
                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             <connections>
-                                <action selector="sayItFromClipboard:" target="Voe-Tx-rLC" id="hPT-Oi-LPK"/>
+                                <action selector="startSpeakingFromClipboard:" target="Voe-Tx-rLC" id="hPT-Oi-LPK"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="x5O-FE-a7p"/>
@@ -310,7 +310,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
                                 <clipView key="contentView" drawsBackground="NO" id="e32-8D-W9m">
                                     <rect key="frame" x="1" y="0.0" width="448" height="171"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="4q7-OV-A3D" viewBased="YES" id="98p-QR-qKs">
                                             <rect key="frame" x="0.0" y="0.0" width="448" height="146"/>
@@ -436,7 +436,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1yY-hT-Q8R">
                                     <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="vXz-nD-bdY">
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -600,7 +600,7 @@
                                 <rect key="frame" x="20" y="51" width="410" height="199"/>
                                 <clipView key="contentView" id="Jql-Xn-JpI">
                                     <rect key="frame" x="1" y="0.0" width="408" height="198"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="iJF-9R-JKh" viewBased="YES" id="RAk-8q-wZh">
                                             <rect key="frame" x="0.0" y="0.0" width="408" height="173"/>

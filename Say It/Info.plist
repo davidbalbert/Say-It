@@ -36,7 +36,7 @@
 				<string>public.text</string>
 			</array>
 			<key>NSMessage</key>
-			<string>sayIt</string>
+			<string>startSpeaking</string>
 			<key>NSRequiredContext</key>
 			<dict>
 				<key>NSServiceCategory</key>

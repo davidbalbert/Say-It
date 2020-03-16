@@ -62,8 +62,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         }
 
         sayItFromClipboardShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .control]) { shortcut in
-            if self.canSayItFromClipboard() {
-                self.sayItFromClipboard(nil)
+            if self.canStartSpeakingFromClipboard() {
+                self.startSpeakingFromClipboard(nil)
                 self.statusItem.button?.highlight(true)
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -84,20 +84,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         return false
     }
 
-    func canSayItFromClipboard() -> Bool {
+    func canStartSpeakingFromClipboard() -> Bool {
         guard let items = NSPasteboard.general.pasteboardItems else { return false }
         let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")])
 
         return type != nil
     }
 
-    @IBAction func sayItFromClipboard(_ sender: Any?) {
+    @IBAction func startSpeakingFromClipboard(_ sender: Any?) {
         var error: NSString?
 
-        sayIt(NSPasteboard.general, userData: nil, error: &error)
+        startSpeaking(NSPasteboard.general, userData: nil, error: &error)
     }
 
-    @objc func sayIt(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
+    @objc func startSpeaking(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
 
         NSWorkspace.shared.menuBarOwningApplication?.activate()
 
@@ -135,8 +135,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking {
             return false
-        } else if menuItem.action == #selector(AppDelegate.sayItFromClipboard(_:)) {
-            return canSayItFromClipboard()
+        } else if menuItem.action == #selector(AppDelegate.startSpeakingFromClipboard(_:)) {
+            return canStartSpeakingFromClipboard()
         }
 
         return true
