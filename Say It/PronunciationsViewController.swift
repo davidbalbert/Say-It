@@ -89,7 +89,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         if addRemove.isSelected(forSegment: 0) {
             var ps = Defaults.pronunciations
 
-            if (ps.isEmpty || ps.last! != Pronunciation(from: "", to: "")) {
+            if (ps.isEmpty || !ps.last!.isBlank) {
                 ps.append(Pronunciation(from: "", to: ""))
                 Defaults.pronunciations = ps
 

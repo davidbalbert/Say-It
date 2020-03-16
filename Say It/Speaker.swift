@@ -81,7 +81,21 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
             handler()
         }
 
-        synth.startSpeaking(s)
+        synth.startSpeaking(substitutePronunciations(s))
+    }
+
+    func substitutePronunciations(_ s: String) ->  String {
+        var res = s
+
+        for p in Defaults.pronunciations {
+            if (p.isBlank) {
+                continue
+            }
+
+            res = res.replacingOccurrences(of: p.from, with: p.to)
+        }
+
+        return res
     }
 
     func stopSpeaking() {

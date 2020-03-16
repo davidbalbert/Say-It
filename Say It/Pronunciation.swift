@@ -10,6 +10,10 @@ struct Pronunciation : Equatable {
     var from: String
     var to: String
 
+    var isBlank: Bool {
+        from == "" && to == ""
+    }
+
     init(from: String, to: String) {
         self.from = from
         self.to = to
