@@ -32,19 +32,20 @@ struct Defaults {
     }
 
 
-    private static var _pronunciations: [Pronounciation]?
+    private static var _pronunciations: [Pronunciation]?
 
-    static var pronunciations: [Pronounciation] {
+    static var pronunciations: [Pronunciation] {
         get {
             if let _pronunciations = _pronunciations {
                 return _pronunciations
             }
 
-            guard let data = UserDefaults.standard.value(forKey:"pronunciations") as? Data else {
+            guard let a = UserDefaults.standard.array(forKey: "pronunciations") as? [Dictionary<String, String>] else {
                 return []
             }
 
-            let r = (try? PropertyListDecoder().decode([Pronounciation].self, from: data)) ?? []
+            let r = a.compactMap { d in Pronunciation(dictionary: d) }
+
             _pronunciations = r
 
             return r
@@ -52,7 +53,7 @@ struct Defaults {
 
         set {
             _pronunciations = newValue
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(newValue), forKey: "pronunciations")
+            UserDefaults.standard.set(newValue.map { $0.toDictionary() }, forKey: "pronunciations")
         }
     }
 }

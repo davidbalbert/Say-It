@@ -9,7 +9,7 @@
 import Cocoa
 import os.log
 
-class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var addRemove: NSSegmentedControl!
     var justDeleted = false
@@ -89,8 +89,8 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
         if addRemove.isSelected(forSegment: 0) {
             var ps = Defaults.pronunciations
 
-            if (ps.isEmpty || ps.last! != Pronounciation(from: "", to: "")) {
-                ps.append(Pronounciation(from: "", to: ""))
+            if (ps.isEmpty || ps.last! != Pronunciation(from: "", to: "")) {
+                ps.append(Pronunciation(from: "", to: ""))
                 Defaults.pronunciations = ps
 
                 tableView.insertRows(at: IndexSet(integer: ps.count-1))
@@ -106,7 +106,7 @@ class PronounciationsViewController: NSViewController, NSTableViewDelegate, NSTa
 
             let a = NSMutableArray(array: Defaults.pronunciations)
             a.removeObjects(at: s)
-            Defaults.pronunciations = a as NSArray as! [Pronounciation]
+            Defaults.pronunciations = a as NSArray as! [Pronunciation]
 
             // HACK: make sure we ignore the text view action that gets fired when we delete a row
             // while we're editing a cell.
