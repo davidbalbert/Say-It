@@ -11,12 +11,10 @@ import Cocoa
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate {
 
     @IBOutlet var textField: NSTextField!
-    @IBOutlet var sayItButton: NSButton!
-    @IBOutlet var sayItFromClipboardButton: NSButton!
-    @IBOutlet var stopButton: NSButton!
-
     @IBOutlet var rateSlider: NSSlider!
     @IBOutlet var rateTextField: NSTextField!
+    @IBOutlet var testButton: NSButton!
+    @IBOutlet var dockCheckbox: NSButton!
 
     var speakerBeginId: UUID!
     var speakerCompletionId: UUID!
@@ -28,20 +26,17 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         didSet {
             if speaking {
                 textField.isEnabled = false
-                sayItButton.isEnabled = false
-                sayItFromClipboardButton.isEnabled = false
                 rateSlider.isEnabled = false
                 rateTextField.isEnabled = false
-
-                stopButton.isEnabled = true
+                testButton.title = "Stop"
+                testButton.action = #selector(stopSpeaking(_:))
             } else {
                 textField.isEnabled = true
-                sayItButton.isEnabled = true
-                sayItFromClipboardButton.isEnabled = true
                 rateSlider.isEnabled = true
                 rateTextField.isEnabled = true
+                testButton.title = "Test"
+                testButton.action = #selector(speakTextfieldContents(_:))
 
-                stopButton.isEnabled = false
             }
         }
     }
@@ -75,35 +70,13 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         speakerCompletionId = appDelegate.speaker.addCompletionHandler { [weak self] in
             self?.speaking = false
         }
+
+        dockCheckbox.state = Defaults.showDock ? .on : .off
     }
 
     override func viewWillDisappear() {
         appDelegate.speaker.removeBeginHandler(speakerBeginId)
         appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
-    }
-
-    override var representedObject: Any? {
-        didSet {
-            // Update the view, if already loaded.
-        }
-    }
-
-    @IBAction func sayIt(_ sender: NSButton) {
-        appDelegate.speaker.startSpeaking(textField.stringValue)
-    }
-
-    @IBAction func sayItFromClipboard(_ sender: NSButton) {
-        guard let text = NSPasteboard.general.string(forType: .string) else {
-            let alert = NSAlert()
-            alert.addButton(withTitle: "OK")
-            alert.messageText = "No text in the clipboard"
-            alert.informativeText = "There's no text in the clipboard, so there's nothing to say. Copy some text and try again."
-            alert.alertStyle = .warning
-            alert.beginSheetModal(for: view.window!, completionHandler: nil)
-            return
-        }
-
-        appDelegate.speaker.startSpeaking(text)
     }
 
     @IBAction func updateRate(_ sender: NSControl) {
@@ -116,7 +89,11 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         }
     }
 
-    @IBAction func stopSpeaking(_ sender: Any) {
+    @IBAction func speakTextfieldContents(_ sender: NSButton) {
+        appDelegate.speaker.startSpeaking(textField.stringValue)
+    }
+
+    @IBAction func stopSpeaking(_ sender: NSButton) {
         appDelegate.speaker.stopSpeaking()
     }
 
@@ -124,6 +101,7 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         if NSApp.activationPolicy() == .regular {
             Defaults.showDock = false
             NSApp.setActivationPolicy(.accessory)
+            NSApp.activate(ignoringOtherApps: true)
         } else {
             Defaults.showDock = true
             NSApp.setActivationPolicy(.regular)
