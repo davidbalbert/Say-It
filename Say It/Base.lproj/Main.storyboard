@@ -321,7 +321,7 @@
                                             <tableColumns>
                                                 <tableColumn width="109" minWidth="10" maxWidth="3.4028234663852886e+38" id="ePW-p5-Agc">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Timestamp">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </tableHeaderCell>
@@ -336,9 +336,11 @@
                                                             <rect key="frame" x="1" y="1" width="109" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TX7-tY-M3r">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TX7-tY-M3r">
                                                                     <rect key="frame" x="0.0" y="0.0" width="109" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="17" id="fwN-oI-9n7"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="cz9-Lf-oBc">
                                                                         <dateFormatter key="formatter" dateStyle="short" timeStyle="medium" id="BPc-0T-mNn"/>
                                                                         <font key="font" metaFont="system"/>
@@ -347,6 +349,11 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="TX7-tY-M3r" firstAttribute="leading" secondItem="hBW-a1-t33" secondAttribute="leading" constant="2" id="Ul8-Vi-YG2"/>
+                                                                <constraint firstItem="TX7-tY-M3r" firstAttribute="centerY" secondItem="hBW-a1-t33" secondAttribute="centerY" id="m2u-0n-jav"/>
+                                                                <constraint firstItem="TX7-tY-M3r" firstAttribute="centerX" secondItem="hBW-a1-t33" secondAttribute="centerX" id="y5I-sa-EwS"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="TX7-tY-M3r" id="pWk-cY-uNV"/>
                                                             </connections>
@@ -355,7 +362,7 @@
                                                 </tableColumn>
                                                 <tableColumn width="333" minWidth="40" maxWidth="1000" id="Mut-fW-bAz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Text">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -370,9 +377,11 @@
                                                             <rect key="frame" x="113" y="1" width="333" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E36-1A-CHy">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="E36-1A-CHy">
                                                                     <rect key="frame" x="0.0" y="0.0" width="333" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="17" id="GpC-r6-Bzy"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="vo5-R0-U2p">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -380,6 +389,11 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="E36-1A-CHy" firstAttribute="centerY" secondItem="Nud-P0-Bek" secondAttribute="centerY" id="BZM-ca-CXZ"/>
+                                                                <constraint firstItem="E36-1A-CHy" firstAttribute="leading" secondItem="Nud-P0-Bek" secondAttribute="leading" constant="2" id="ScQ-Oo-QhN"/>
+                                                                <constraint firstItem="E36-1A-CHy" firstAttribute="centerX" secondItem="Nud-P0-Bek" secondAttribute="centerX" id="tMn-cF-NRO"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="E36-1A-CHy" id="Lne-lx-pwl"/>
                                                             </connections>
@@ -491,9 +505,6 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XBQ-zC-pPB">
                                 <rect key="frame" x="376" y="82" width="90" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="78" id="q82-cq-6VM"/>
-                                </constraints>
                                 <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JCP-HH-jux">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -520,7 +531,7 @@
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0bP-zT-7V4">
                                 <rect key="frame" x="382" y="48" width="44" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="T0p-eQ-u8Y"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="dgm-Lw-TkM"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="XXXX" drawsBackground="YES" id="Swk-ok-PfJ">
                                     <font key="font" metaFont="system"/>
@@ -551,25 +562,26 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="XBQ-zC-pPB" firstAttribute="leading" secondItem="g8I-My-xBq" secondAttribute="trailing" constant="8" id="1Di-Vv-KxB"/>
-                            <constraint firstItem="rcw-rr-vYs" firstAttribute="top" secondItem="g8I-My-xBq" secondAttribute="bottom" constant="26" id="222-la-dqr"/>
-                            <constraint firstItem="rcw-rr-vYs" firstAttribute="leading" secondItem="Sng-jC-gbi" secondAttribute="trailing" constant="8" id="8oc-IF-nTS"/>
-                            <constraint firstItem="Sng-jC-gbi" firstAttribute="top" secondItem="g8I-My-xBq" secondAttribute="bottom" constant="22" id="8wK-XB-Zur"/>
+                            <constraint firstAttribute="trailing" secondItem="XBQ-zC-pPB" secondAttribute="trailing" constant="20" symbolic="YES" id="0P3-aE-ccp"/>
+                            <constraint firstItem="XBQ-zC-pPB" firstAttribute="leading" secondItem="g8I-My-xBq" secondAttribute="trailing" constant="8" symbolic="YES" id="5KO-Df-57M"/>
                             <constraint firstAttribute="height" priority="499" constant="130" id="CGQ-cK-60e"/>
-                            <constraint firstItem="SrH-4b-tEv" firstAttribute="leading" secondItem="0bP-zT-7V4" secondAttribute="trailing" constant="2" id="Cec-AU-9r3"/>
-                            <constraint firstItem="SrH-4b-tEv" firstAttribute="firstBaseline" secondItem="Sng-jC-gbi" secondAttribute="firstBaseline" id="Kwy-BO-5qY"/>
-                            <constraint firstItem="XBQ-zC-pPB" firstAttribute="firstBaseline" secondItem="g8I-My-xBq" secondAttribute="firstBaseline" id="LlU-dE-2Eu"/>
-                            <constraint firstItem="0bP-zT-7V4" firstAttribute="firstBaseline" secondItem="Sng-jC-gbi" secondAttribute="firstBaseline" id="RfY-Fs-ysJ"/>
-                            <constraint firstAttribute="trailing" secondItem="XBQ-zC-pPB" secondAttribute="trailing" constant="20" symbolic="YES" id="UFf-t4-lEf"/>
-                            <constraint firstAttribute="trailing" secondItem="SrH-4b-tEv" secondAttribute="trailing" constant="20" id="e8M-ew-KdX"/>
-                            <constraint firstItem="G9r-0Q-BAN" firstAttribute="top" secondItem="rcw-rr-vYs" secondAttribute="bottom" constant="8" id="fT4-y9-GzB"/>
-                            <constraint firstItem="Sng-jC-gbi" firstAttribute="leading" secondItem="g8I-My-xBq" secondAttribute="leading" id="gcd-jX-pmF"/>
-                            <constraint firstItem="0bP-zT-7V4" firstAttribute="leading" secondItem="rcw-rr-vYs" secondAttribute="trailing" constant="8" id="hS9-AC-YZk"/>
-                            <constraint firstItem="g8I-My-xBq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="k3q-yq-pJg"/>
-                            <constraint firstAttribute="trailing" secondItem="G9r-0Q-BAN" secondAttribute="trailing" constant="345" id="oHq-f2-8Gy"/>
+                            <constraint firstItem="SrH-4b-tEv" firstAttribute="baseline" secondItem="0bP-zT-7V4" secondAttribute="baseline" id="DkN-nc-XfS"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G9r-0Q-BAN" secondAttribute="trailing" constant="20" symbolic="YES" id="EuR-a9-xDP"/>
+                            <constraint firstItem="XBQ-zC-pPB" firstAttribute="leading" secondItem="0bP-zT-7V4" secondAttribute="leading" id="F4s-Cg-p6e"/>
+                            <constraint firstItem="Sng-jC-gbi" firstAttribute="top" secondItem="g8I-My-xBq" secondAttribute="bottom" constant="22" id="OkG-ce-4dn"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="Pq4-Ai-QR4"/>
+                            <constraint firstItem="0bP-zT-7V4" firstAttribute="top" secondItem="XBQ-zC-pPB" secondAttribute="bottom" constant="20" id="UPe-bR-XG7"/>
+                            <constraint firstItem="SrH-4b-tEv" firstAttribute="leading" secondItem="0bP-zT-7V4" secondAttribute="trailing" constant="2" id="YNX-cA-s5U"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="cFk-X4-RUU"/>
+                            <constraint firstItem="SrH-4b-tEv" firstAttribute="trailing" secondItem="XBQ-zC-pPB" secondAttribute="trailing" id="cxy-M4-8wO"/>
+                            <constraint firstItem="rcw-rr-vYs" firstAttribute="top" secondItem="g8I-My-xBq" secondAttribute="bottom" constant="26" id="d5L-qH-uwS"/>
+                            <constraint firstItem="G9r-0Q-BAN" firstAttribute="top" secondItem="rcw-rr-vYs" secondAttribute="bottom" constant="8" id="eJ1-PU-TcS"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="trailing" secondItem="rcw-rr-vYs" secondAttribute="trailing" id="eLr-IT-CZa"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="baseline" secondItem="XBQ-zC-pPB" secondAttribute="baseline" id="naG-r3-FG5"/>
                             <constraint firstAttribute="width" priority="499" constant="480" id="qUK-C5-VzZ"/>
-                            <constraint firstItem="G9r-0Q-BAN" firstAttribute="leading" secondItem="g8I-My-xBq" secondAttribute="leading" id="s2e-8p-MAV"/>
-                            <constraint firstItem="g8I-My-xBq" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="zjo-01-ljR"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="leading" secondItem="Sng-jC-gbi" secondAttribute="leading" id="tsQ-bp-3W3"/>
+                            <constraint firstItem="rcw-rr-vYs" firstAttribute="leading" secondItem="Sng-jC-gbi" secondAttribute="trailing" constant="8" id="xD8-RB-DAw"/>
+                            <constraint firstItem="g8I-My-xBq" firstAttribute="leading" secondItem="G9r-0Q-BAN" secondAttribute="leading" id="xRh-Cc-dSX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -606,7 +618,7 @@
                                             <tableColumns>
                                                 <tableColumn width="118" minWidth="40" maxWidth="1000" id="SiW-cx-ahy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Replace">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -621,9 +633,11 @@
                                                             <rect key="frame" x="1" y="1" width="118" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ps9-F8-6LA">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ps9-F8-6LA">
                                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="17" id="zRM-aD-oAJ"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="J1F-71-eTQ">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -634,6 +648,11 @@
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="Ps9-F8-6LA" firstAttribute="leading" secondItem="kmb-7w-dFz" secondAttribute="leading" constant="2" id="8Fb-ua-ojA"/>
+                                                                <constraint firstItem="Ps9-F8-6LA" firstAttribute="centerX" secondItem="kmb-7w-dFz" secondAttribute="centerX" id="q5G-JV-QV5"/>
+                                                                <constraint firstItem="Ps9-F8-6LA" firstAttribute="centerY" secondItem="kmb-7w-dFz" secondAttribute="centerY" id="qFr-aH-ttV"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="Ps9-F8-6LA" id="HbC-Oa-8ym"/>
                                                             </connections>
@@ -642,7 +661,7 @@
                                                 </tableColumn>
                                                 <tableColumn width="314" minWidth="40" maxWidth="1000" id="gVP-Kw-Ly4">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="With">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -657,9 +676,11 @@
                                                             <rect key="frame" x="122" y="1" width="314" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VM4-Cd-Qhd">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VM4-Cd-Qhd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="314" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="17" id="oic-Ud-7wk"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="bgD-Zj-fLZ">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -670,6 +691,11 @@
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="VM4-Cd-Qhd" firstAttribute="centerY" secondItem="kLN-Zu-cUw" secondAttribute="centerY" id="5rx-vB-d2k"/>
+                                                                <constraint firstItem="VM4-Cd-Qhd" firstAttribute="leading" secondItem="kLN-Zu-cUw" secondAttribute="leading" constant="2" id="eZX-9I-qA5"/>
+                                                                <constraint firstItem="VM4-Cd-Qhd" firstAttribute="centerX" secondItem="kLN-Zu-cUw" secondAttribute="centerX" id="xff-dS-UDC"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="VM4-Cd-Qhd" id="Mj6-zE-ryU"/>
                                                             </connections>
