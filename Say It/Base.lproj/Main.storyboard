@@ -191,6 +191,12 @@
                                 <action selector="startSpeakingFromClipboard:" target="Voe-Tx-rLC" id="hPT-Oi-LPK"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Show Transcript" hidden="YES" id="RkF-uP-bwx">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="vPt-yt-MNt"/>
+                            </connections>
+                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="x5O-FE-a7p"/>
                         <menuItem title="About Say It" id="XD6-94-L3G">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -199,12 +205,6 @@
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="e1y-mt-0gl"/>
-                        <menuItem title="Show Transcript" hidden="YES" id="RkF-uP-bwx">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="showTranscript:" target="Voe-Tx-rLC" id="vPt-yt-MNt"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Preferences…" id="Wox-1b-e9N">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
