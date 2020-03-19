@@ -14,7 +14,7 @@ class PreferencesViewController: NSTabViewController {
             return
         }
 
-        sizeWindowToContent(of: view, animate: false)
+        sizeWindowContentToContent(of: view, animate: false)
     }
 
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
@@ -27,7 +27,7 @@ class PreferencesViewController: NSTabViewController {
         oldView.isHidden = true
         newView.isHidden = true
 
-        sizeWindowToContent(of: newView, animate: true)
+        sizeWindowContentToContent(of: newView, animate: true)
     }
 
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
@@ -37,7 +37,7 @@ class PreferencesViewController: NSTabViewController {
         view.window?.title = title ?? "Preferences"
     }
 
-    func sizeWindowToContent(of newView: NSView, animate: Bool) {
+    func sizeWindowContentToContent(of newView: NSView, animate: Bool) {
         guard let window = view.window else {
             return
         }
