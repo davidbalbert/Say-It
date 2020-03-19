@@ -9,34 +9,47 @@
 import Cocoa
 
 class PreferencesViewController: NSTabViewController {
+    override func viewWillAppear() {
+        guard let view = tabView.selectedTabViewItem?.view else {
+            return
+        }
+
+        sizeWindowContentToContent(of: view, animate: false)
+    }
+
+    override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
+        super.tabView(tabView, willSelect: tabViewItem)
+
+        guard let oldView = tabView.selectedTabViewItem?.view, let newView = tabViewItem?.view  else {
+            return
+        }
+
+        oldView.isHidden = true
+        newView.isHidden = true
+
+        sizeWindowContentToContent(of: newView, animate: true)
+    }
+
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
 
+        tabViewItem?.view?.isHidden = false
         view.window?.title = title ?? "Preferences"
     }
 
-    override func transition(from fromViewController: NSViewController, to toViewController: NSViewController, options: NSViewController.TransitionOptions = [], completionHandler completion: (() -> Void)? = nil) {
-
-        NSAnimationContext.runAnimationGroup { context in
-            updateWindowFrame(from: fromViewController, to: toViewController)
-
-            super.transition(from: fromViewController, to: toViewController, options: options, completionHandler: completion)
-        }
-    }
-
-    func updateWindowFrame(from fromViewController: NSViewController, to toViewController: NSViewController) {
+    func sizeWindowContentToContent(of newView: NSView, animate: Bool) {
         guard let window = view.window else {
             return
         }
 
-        let oldsz = fromViewController.view.frame.size
-        let newsz = toViewController.view.frame.size
-        let diff = NSSize(width: newsz.width - oldsz.width, height: newsz.height - oldsz.height)
+        let contentSize = newView.fittingSize
+        let newWindowSize = window.frameRect(forContentRect: NSRect(origin: NSPoint.zero, size: contentSize)).size
 
-        let oldFrame = window.frame
-        let newOrigin = NSPoint(x: oldFrame.origin.x, y: oldFrame.origin.y - diff.height)
-        let newFrame = NSRect(origin: newOrigin, size: NSSize(width: oldFrame.size.width + diff.width, height: oldFrame.size.height + diff.height))
+        var frame = window.frame
+        frame.origin.y += frame.size.height
+        frame.origin.y -= newWindowSize.height
+        frame.size = newWindowSize
 
-        window.animator().setFrame(newFrame, display: false)
+        window.setFrame(frame, display: false, animate: animate)
     }
 }
