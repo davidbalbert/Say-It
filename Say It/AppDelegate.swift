@@ -19,6 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
     var speaker = Speaker()
+    var statusIcon = NSImage(named: "StatusIcon")
+    var playingIcon = NSImage(named: "StatusIcon-playing")
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -42,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.menu = statusMenu
-        statusItem.button?.image = NSImage(named: "StatusIcon")
+        statusItem.button?.image = statusIcon
 
         stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { [weak self] shortcut in
 
@@ -74,6 +76,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
                     self.statusItem.button?.highlight(false)
                 }
             }
+        }
+
+        speaker.addBeginHandler { [weak self] in
+            self?.statusItem.button?.image = self?.playingIcon
+        }
+
+        speaker.addCompletionHandler { [weak self] in
+            self?.statusItem.button?.image = self?.statusIcon
         }
     }
 
