@@ -12,15 +12,13 @@ var appDelegate: AppDelegate!
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
-    @IBOutlet var statusMenu: NSMenu!
+    @IBOutlet var statusMenuController: StatusMenuController!
     var preferencesWindowController: NSWindowController!
     var transcriptWindowController: NSWindowController!
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
     var speaker = Speaker()
-    var statusIcon = NSImage(named: "StatusIcon")
-    var playingIcon = NSImage(named: "StatusIcon-playing")
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -28,9 +26,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         }
     }
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    override init() {
+        super.init()
         appDelegate = self
+    }
 
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.servicesProvider = self
 
         if !Defaults.showDock && NSApp.activationPolicy() != .accessory {
@@ -42,9 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         preferencesWindowController = storyboard.instantiateController(identifier: "Preferences")
         transcriptWindowController = storyboard.instantiateController(identifier: "Transcript")
 
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem.menu = statusMenu
-        statusItem.button?.image = statusIcon
+        statusMenuController.registerCallbacks(speaker)
 
         stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { [weak self] shortcut in
 
@@ -54,11 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
             if self.speaker.isSpeaking {
                 self.stopSpeaking(nil)
-                self.statusItem.button?.highlight(true)
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.statusItem.button?.highlight(false)
-                }
+                self.statusMenuController.highlightMenu()
             }
         }
 
@@ -70,20 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
             if self.canStartSpeakingFromClipboard() {
                 self.startSpeakingFromClipboard(nil)
-                self.statusItem.button?.highlight(true)
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.statusItem.button?.highlight(false)
-                }
+                self.statusMenuController.highlightMenu()
             }
-        }
-
-        speaker.addBeginHandler { [weak self] in
-            self?.statusItem.button?.image = self?.playingIcon
-        }
-
-        speaker.addCompletionHandler { [weak self] in
-            self?.statusItem.button?.image = self?.statusIcon
         }
     }
 

@@ -173,7 +173,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Say_It" customModuleProvider="target">
                     <connections>
-                        <outlet property="statusMenu" destination="eUy-G0-5Kr" id="ci6-rI-The"/>
+                        <outlet property="statusMenuController" destination="HBC-61-3Ys" id="e6r-7Z-fEu"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -218,13 +218,11 @@
                             </connections>
                         </menuItem>
                     </items>
-                    <connections>
-                        <outlet property="delegate" destination="NrK-qa-xoh" id="dT1-Xe-Zoe"/>
-                    </connections>
                 </menu>
-                <customObject id="NrK-qa-xoh" customClass="StatusMenuDelegate" customModule="Say_It" customModuleProvider="target">
+                <customObject id="HBC-61-3Ys" customClass="StatusMenuController" customModule="Say_It" customModuleProvider="target">
                     <connections>
-                        <outlet property="transcriptMenuItem" destination="RkF-uP-bwx" id="nm7-H8-3ME"/>
+                        <outlet property="menu" destination="eUy-G0-5Kr" id="hEw-4P-C1d"/>
+                        <outlet property="transcriptMenuItem" destination="RkF-uP-bwx" id="NgG-eY-aII"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -302,18 +300,18 @@
         <scene sceneID="F6h-S1-pGm">
             <objects>
                 <viewController id="s3x-aS-GGM" customClass="TranscriptTableViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="dYM-mU-FDM">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
+                    <view key="view" misplaced="YES" id="dYM-mU-FDM">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="147"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIK-wf-3u3">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="122"/>
                                 <clipView key="contentView" drawsBackground="NO" id="e32-8D-W9m">
-                                    <rect key="frame" x="1" y="0.0" width="448" height="171"/>
+                                    <rect key="frame" x="1" y="0.0" width="448" height="121"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="4q7-OV-A3D" viewBased="YES" id="98p-QR-qKs">
-                                            <rect key="frame" x="0.0" y="0.0" width="448" height="146"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="96"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -600,17 +598,17 @@
         <scene sceneID="Xqx-hT-WrE">
             <objects>
                 <viewController title="Pronounciations" id="vmv-sm-lge" customClass="PronunciationsViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="tmr-ia-fc9">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="280"/>
+                    <view key="view" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tmr-ia-fc9">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="255"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5D-PC-iUQ">
-                                <rect key="frame" x="20" y="60" width="440" height="200"/>
+                                <rect key="frame" x="20" y="60" width="440" height="150"/>
                                 <clipView key="contentView" id="Jql-Xn-JpI">
-                                    <rect key="frame" x="1" y="0.0" width="438" height="199"/>
+                                    <rect key="frame" x="1" y="0.0" width="438" height="149"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="iJF-9R-JKh" viewBased="YES" id="RAk-8q-wZh">
-                                            <rect key="frame" x="0.0" y="0.0" width="438" height="174"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="438" height="124"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
