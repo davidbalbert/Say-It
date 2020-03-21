@@ -45,7 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         statusItem.menu = statusMenu
         statusItem.button?.image = NSImage(named: "StatusIcon")
 
-        stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { shortcut in
+        stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { [weak self] shortcut in
+
+            guard let self = self else {
+                return
+            }
+
             if self.speaker.isSpeaking {
                 self.stopSpeaking(nil)
                 self.statusItem.button?.highlight(true)
@@ -56,7 +61,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
             }
         }
 
-        sayItFromClipboardShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .control]) { shortcut in
+        sayItFromClipboardShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .control]) { [weak self] shortcut in
+
+            guard let self = self else {
+                return
+            }
+
             if self.canStartSpeakingFromClipboard() {
                 self.startSpeakingFromClipboard(nil)
                 self.statusItem.button?.highlight(true)

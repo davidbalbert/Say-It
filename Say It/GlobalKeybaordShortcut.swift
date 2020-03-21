@@ -8,7 +8,7 @@
 
 import Carbon
 
-extension FourCharCode {
+private extension FourCharCode {
     static func from(string s: String) -> FourCharCode? {
         if s.count != 4 || s.lengthOfBytes(using: .utf8) != 4 {
             return nil
