@@ -9,11 +9,11 @@
 import Foundation
 
 struct Defaults {
-    static var rate: Int? {
+    static var rate: Int {
         get {
             let r = UserDefaults.standard.integer(forKey: "rate")
 
-            return r == 0 ? nil : r
+            return r == 0 ? 175 : r // 175 is NSSpeechSynthesizer().rate
         }
 
         set {

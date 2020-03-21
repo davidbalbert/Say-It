@@ -9,7 +9,7 @@
 import Cocoa
 
 class Speaker : NSObject, NSSpeechSynthesizerDelegate {
-    let synth = NSSpeechSynthesizer()
+    var synth: NSSpeechSynthesizer?
 
     var skipCompletionHandlersInSynthCallback = false
 
@@ -18,18 +18,12 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
 
     var rate: Int {
         get {
-            return Defaults.rate ?? Int(synth.rate)
+            return Defaults.rate
         }
     }
 
     @objc var isSpeaking: Bool {
-        return synth.isSpeaking
-    }
-
-    override init() {
-        super.init()
-
-        synth.delegate = self
+        return synth?.isSpeaking ?? false
     }
 
     func addBeginHandler(_ handler: @escaping () -> Void) -> UUID {
@@ -55,7 +49,7 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
     }
 
     func startSpeaking(_ s: String) {
-        if synth.isSpeaking {
+        if let synth = synth, synth.isSpeaking {
             // speechSynthesizer:didFinishSpeaking: seems to get called asynchronously
             // after we return to the run loop. That would mean if we start speaking
             // when we're already speaking, the order of callbacks would be like this:
@@ -73,9 +67,10 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
             runCompletionHandlers()
         }
 
-        if let rate = Defaults.rate {
-            synth.rate = Float(rate)
-        }
+        let synth = NSSpeechSynthesizer()
+        synth.delegate = self
+        synth.rate = Float(Defaults.rate)
+        self.synth = synth
 
         beginHandlers.values.forEach { handler in
             handler()
@@ -99,7 +94,8 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
     }
 
     func stopSpeaking() {
-        synth.stopSpeaking()
+        synth?.stopSpeaking()
+        synth = nil
     }
 
     func speechSynthesizer(_ sender: NSSpeechSynthesizer, didFinishSpeaking finishedSpeaking: Bool) {
