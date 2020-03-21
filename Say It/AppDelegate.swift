@@ -130,9 +130,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(AppDelegate.stopSpeaking(_:)) && !speaker.isSpeaking {
+        if menuItem.action == #selector(stopSpeaking(_:)) && !speaker.isSpeaking {
             return false
-        } else if menuItem.action == #selector(AppDelegate.startSpeakingFromClipboard(_:)) {
+        } else if menuItem.action == #selector(startSpeakingFromClipboard(_:)) {
             return canStartSpeakingFromClipboard()
         }
 

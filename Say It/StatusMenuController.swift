@@ -10,6 +10,7 @@ import Cocoa
 
 class StatusMenuController: NSObject, NSMenuDelegate {
     @IBOutlet var transcriptMenuItem: NSMenuItem!
+    @IBOutlet var stopSpeakingMenuItem: NSMenuItem!
     @IBOutlet var menu: NSMenu! {
         didSet {
             self.statusItem.menu = menu
@@ -42,10 +43,12 @@ class StatusMenuController: NSObject, NSMenuDelegate {
     func registerCallbacks(_ speaker: Speaker) {
         beginHandlerId = speaker.addBeginHandler { [weak self] in
             self?.statusItem.button?.image = self?.playingIcon
+            self?.stopSpeakingMenuItem.isEnabled = true
         }
 
         completionHandlerId = speaker.addCompletionHandler { [weak self] in
             self?.statusItem.button?.image = self?.statusIcon
+            self?.stopSpeakingMenuItem.isEnabled = false
         }
     }
 
