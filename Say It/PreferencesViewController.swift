@@ -9,7 +9,21 @@
 import Cocoa
 
 class PreferencesViewController: NSTabViewController {
+    override func viewDidLoad() {
+        // Super.viewDidLoad() selects tabIndex 0, which will overwrite
+        // our saved preference. Load the preference
+        let i = Defaults.selectedPreferenceTabIndex
+
+        super.viewDidLoad()
+
+        if (i < tabViewItems.count) {
+            selectedTabViewItemIndex = i
+        }
+    }
+
     override func viewWillAppear() {
+        super.viewWillAppear()
+
         guard let view = tabView.selectedTabViewItem?.view else {
             return
         }
@@ -34,7 +48,12 @@ class PreferencesViewController: NSTabViewController {
         super.tabView(tabView, didSelect: tabViewItem)
 
         tabViewItem?.view?.isHidden = false
-        view.window?.title = title ?? "Preferences"
+
+        Defaults.selectedPreferenceTabIndex = selectedTabViewItemIndex
+
+        if let title = title {
+            view.window?.title = title
+        }
     }
 
     func sizeWindowContentToContent(of newView: NSView, animate: Bool) {
