@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
-    var speaker: Speaker!
+    var speaker = Speaker()
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -28,7 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         appDelegate = self
-        speaker = Speaker()
 
         NSApp.servicesProvider = self
 
