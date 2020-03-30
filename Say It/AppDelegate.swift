@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
     var speaker = Speaker()
+    var terminating = false
 
     var listener: NSXPCListener! // TODO: switch this to let and initialize it on construction
 
@@ -79,6 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
 
     func applicationWillTerminate(_ notification: Notification) {
         NSLog("Terminate")
+        terminating = true
         SMLoginItemSetEnabled("is.dave.Say-It-Helper" as CFString, false)
     }
 
@@ -99,8 +101,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
         service.registerApp(endpoint: listener.endpoint)
 
         connection.interruptionHandler = {
-            NSLog("xxxx XPC interrupt, helper probably restated, re-registering app")
-            service.registerApp(endpoint: self.listener.endpoint)
+            if !self.terminating {
+                NSLog("xxxx XPC interrupt, helper probably restated, re-registering app")
+                service.registerApp(endpoint: self.listener.endpoint)
+            }
         }
     }
 
