@@ -29,9 +29,11 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticTermination</key>
-	<false/>
+	<true/>
 	<key>NSSupportsSuddenTermination</key>
-	<false/>
+	<true/>
+	<key>LSBackgroundOnly</key>
+	<true/>
 	<key>NSServices</key>
 	<array>
 		<dict>

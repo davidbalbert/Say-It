@@ -12,9 +12,6 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     var directConnection: NSXPCConnection?
 
-    @IBOutlet weak var window: NSWindow!
-
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if appIsRunning() {
             setupXPC()

@@ -14,9 +14,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSXPCListenerDelegate, Rende
     var endpoint: NSXPCListenerEndpoint?
     var pendingServiceProviderCallback: ((NSXPCListenerEndpoint) -> Void)?
 
-    @IBOutlet weak var window: NSWindow!
-
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         listener.delegate = self
         listener.resume()
