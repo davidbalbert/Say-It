@@ -12,6 +12,21 @@
 		63275D452413D965008F0992 /* TranscriptDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63275D432413D965008F0992 /* TranscriptDetailViewController.swift */; };
 		63275D482414689F008F0992 /* TranscriptEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63275D472414689F008F0992 /* TranscriptEntry.swift */; };
 		6327CDD622593C27006A73EF /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6327CDD522593C27006A73EF /* Defaults.swift */; };
+		6331A26724317C950042511F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A26624317C940042511F /* AppDelegate.swift */; };
+		6331A26924317C970042511F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6331A26824317C970042511F /* Assets.xcassets */; };
+		6331A26C24317C970042511F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6331A26A24317C970042511F /* MainMenu.xib */; };
+		6331A27924317CA30042511F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A27824317CA30042511F /* AppDelegate.swift */; };
+		6331A27B24317CA60042511F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27A24317CA60042511F /* Assets.xcassets */; };
+		6331A27E24317CA60042511F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27C24317CA60042511F /* MainMenu.xib */; };
+		6331A28524317CF70042511F /* Say It Helper.app in Resources */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* Say It Helper.app */; };
+		6331A28824317CF70042511F /* Say It Service Provider.app in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27624317CA30042511F /* Say It Service Provider.app */; };
+		6331A28E24317D5D0042511F /* Say It Helper.app in Copy Login Items */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* Say It Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6331A29024317D860042511F /* Say It Service Provider.app in Copy Service Provider */ = {isa = PBXBuildFile; fileRef = 6331A27624317CA30042511F /* Say It Service Provider.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6331A29324317DB50042511F /* RendezvousPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29224317DB50042511F /* RendezvousPoint.swift */; };
+		6331A29424317DB50042511F /* RendezvousPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29224317DB50042511F /* RendezvousPoint.swift */; };
+		6331A29524317DB50042511F /* RendezvousPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29224317DB50042511F /* RendezvousPoint.swift */; };
+		6331A29724317DDB0042511F /* SpeakerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29624317DDB0042511F /* SpeakerService.swift */; };
+		6331A29824317DDB0042511F /* SpeakerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29624317DDB0042511F /* SpeakerService.swift */; };
 		63360B8D241FC59100A84D86 /* Pronunciation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63360B8C241FC59100A84D86 /* Pronunciation.swift */; };
 		6350194E225A4DB600D5D1F4 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6350194D225A4DB600D5D1F4 /* Speaker.swift */; };
 		636A085524147607005639DC /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636A085424147607005639DC /* StatusMenuController.swift */; };
@@ -24,12 +39,68 @@
 		63BC967623F0E71D00FDED0B /* GlobalKeybaordShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6331A28624317CF70042511F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63A0C5AE2239A3C200C996DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6331A26324317C940042511F;
+			remoteInfo = "Say It Helper";
+		};
+		6331A28924317CF70042511F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63A0C5AE2239A3C200C996DD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6331A27524317CA30042511F;
+			remoteInfo = "Say It Service Provider";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6331A28D24317D3D0042511F /* Copy Login Items */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				6331A28E24317D5D0042511F /* Say It Helper.app in Copy Login Items */,
+			);
+			name = "Copy Login Items";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6331A28F24317D6E0042511F /* Copy Service Provider */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Helpers;
+			dstSubfolderSpec = 1;
+			files = (
+				6331A29024317D860042511F /* Say It Service Provider.app in Copy Service Provider */,
+			);
+			name = "Copy Service Provider";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		630C33BE240D519700B18813 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		63275D412413D8EA008F0992 /* TranscriptTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptTableViewController.swift; sourceTree = "<group>"; };
 		63275D432413D965008F0992 /* TranscriptDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptDetailViewController.swift; sourceTree = "<group>"; };
 		63275D472414689F008F0992 /* TranscriptEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptEntry.swift; sourceTree = "<group>"; };
 		6327CDD522593C27006A73EF /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		6331A26424317C940042511F /* Say It Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Say It Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6331A26624317C940042511F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6331A26824317C970042511F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6331A26B24317C970042511F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6331A26D24317C970042511F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6331A27624317CA30042511F /* Say It Service Provider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Say It Service Provider.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6331A27824317CA30042511F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6331A27A24317CA60042511F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6331A27D24317CA60042511F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6331A27F24317CA60042511F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6331A29224317DB50042511F /* RendezvousPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendezvousPoint.swift; sourceTree = "<group>"; };
+		6331A29624317DDB0042511F /* SpeakerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerService.swift; sourceTree = "<group>"; };
+		6331A299243224030042511F /* Say It Helper.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Say It Helper.entitlements"; sourceTree = "<group>"; };
+		6331A29A2432240A0042511F /* Say It Service Provider.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Say It Service Provider.entitlements"; sourceTree = "<group>"; };
 		63360B8C241FC59100A84D86 /* Pronunciation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pronunciation.swift; sourceTree = "<group>"; };
 		6350194D225A4DB600D5D1F4 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		636A085424147607005639DC /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
@@ -40,12 +111,25 @@
 		63A0C5BD2239A3C400C996DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63A0C5C02239A3C400C996DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63A0C5C22239A3C400C996DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63A0C5C92239A4F100C996DD /* Say It.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Say It.entitlements"; sourceTree = "<group>"; };
 		63A485572411441C00CBCAFB /* TranscriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptViewController.swift; sourceTree = "<group>"; };
 		63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybaordShortcut.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6331A26124317C940042511F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6331A27324317CA30042511F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63A0C5B32239A3C200C996DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,10 +140,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6331A26524317C940042511F /* Say It Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6331A299243224030042511F /* Say It Helper.entitlements */,
+				6331A26624317C940042511F /* AppDelegate.swift */,
+				6331A26824317C970042511F /* Assets.xcassets */,
+				6331A26A24317C970042511F /* MainMenu.xib */,
+				6331A26D24317C970042511F /* Info.plist */,
+			);
+			path = "Say It Helper";
+			sourceTree = "<group>";
+		};
+		6331A27724317CA30042511F /* Say It Service Provider */ = {
+			isa = PBXGroup;
+			children = (
+				6331A29A2432240A0042511F /* Say It Service Provider.entitlements */,
+				6331A27824317CA30042511F /* AppDelegate.swift */,
+				6331A27A24317CA60042511F /* Assets.xcassets */,
+				6331A27C24317CA60042511F /* MainMenu.xib */,
+				6331A27F24317CA60042511F /* Info.plist */,
+			);
+			path = "Say It Service Provider";
+			sourceTree = "<group>";
+		};
+		6331A29124317D920042511F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6331A29224317DB50042511F /* RendezvousPoint.swift */,
+				6331A29624317DDB0042511F /* SpeakerService.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		63A0C5AD2239A3C200C996DD = {
 			isa = PBXGroup;
 			children = (
+				6331A29124317D920042511F /* Common */,
 				63A0C5B82239A3C200C996DD /* Say It */,
+				6331A26524317C940042511F /* Say It Helper */,
+				6331A27724317CA30042511F /* Say It Service Provider */,
 				63A0C5B72239A3C200C996DD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				63A0C5B62239A3C200C996DD /* Say It.app */,
+				6331A26424317C940042511F /* Say It Helper.app */,
+				6331A27624317CA30042511F /* Say It Service Provider.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,7 +197,6 @@
 		63A0C5B82239A3C200C996DD /* Say It */ = {
 			isa = PBXGroup;
 			children = (
-				63A0C5C92239A4F100C996DD /* Say It.entitlements */,
 				63A0C5B92239A3C200C996DD /* AppDelegate.swift */,
 				636A085424147607005639DC /* StatusMenuController.swift */,
 				63275D472414689F008F0992 /* TranscriptEntry.swift */,
@@ -99,6 +220,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6331A26324317C940042511F /* Say It Helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "Say It Helper" */;
+			buildPhases = (
+				6331A26024317C940042511F /* Sources */,
+				6331A26124317C940042511F /* Frameworks */,
+				6331A26224317C940042511F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Say It Helper";
+			productName = "Say It Helper";
+			productReference = 6331A26424317C940042511F /* Say It Helper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6331A27524317CA30042511F /* Say It Service Provider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6331A28124317CA60042511F /* Build configuration list for PBXNativeTarget "Say It Service Provider" */;
+			buildPhases = (
+				6331A27224317CA30042511F /* Sources */,
+				6331A27324317CA30042511F /* Frameworks */,
+				6331A27424317CA30042511F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Say It Service Provider";
+			productName = "Say It Service Provider";
+			productReference = 6331A27624317CA30042511F /* Say It Service Provider.app */;
+			productType = "com.apple.product-type.application";
+		};
 		63A0C5B52239A3C200C996DD /* Say It */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63A0C5C62239A3C400C996DD /* Build configuration list for PBXNativeTarget "Say It" */;
@@ -106,10 +261,14 @@
 				63A0C5B22239A3C200C996DD /* Sources */,
 				63A0C5B32239A3C200C996DD /* Frameworks */,
 				63A0C5B42239A3C200C996DD /* Resources */,
+				6331A28D24317D3D0042511F /* Copy Login Items */,
+				6331A28F24317D6E0042511F /* Copy Service Provider */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6331A28724317CF70042511F /* PBXTargetDependency */,
+				6331A28A24317CF70042511F /* PBXTargetDependency */,
 			);
 			name = "Say It";
 			productName = "Say It";
@@ -122,10 +281,16 @@
 		63A0C5AE2239A3C200C996DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "David Albert";
 				TargetAttributes = {
+					6331A26324317C940042511F = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					6331A27524317CA30042511F = {
+						CreatedOnToolsVersion = 11.4;
+					};
 					63A0C5B52239A3C200C996DD = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
@@ -154,15 +319,37 @@
 			projectRoot = "";
 			targets = (
 				63A0C5B52239A3C200C996DD /* Say It */,
+				6331A26324317C940042511F /* Say It Helper */,
+				6331A27524317CA30042511F /* Say It Service Provider */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6331A26224317C940042511F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6331A26924317C970042511F /* Assets.xcassets in Resources */,
+				6331A26C24317C970042511F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6331A27424317CA30042511F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6331A27B24317CA60042511F /* Assets.xcassets in Resources */,
+				6331A27E24317CA60042511F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63A0C5B42239A3C200C996DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6331A28824317CF70042511F /* Say It Service Provider.app in Resources */,
+				6331A28524317CF70042511F /* Say It Helper.app in Resources */,
 				63A0C5BE2239A3C400C996DD /* Assets.xcassets in Resources */,
 				63A0C5C12239A3C400C996DD /* Main.storyboard in Resources */,
 			);
@@ -171,6 +358,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6331A26024317C940042511F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6331A26724317C950042511F /* AppDelegate.swift in Sources */,
+				6331A29424317DB50042511F /* RendezvousPoint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6331A27224317CA30042511F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6331A27924317CA30042511F /* AppDelegate.swift in Sources */,
+				6331A29824317DDB0042511F /* SpeakerService.swift in Sources */,
+				6331A29524317DB50042511F /* RendezvousPoint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63A0C5B22239A3C200C996DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -178,12 +384,14 @@
 				630C33BF240D519700B18813 /* PreferencesViewController.swift in Sources */,
 				63275D482414689F008F0992 /* TranscriptEntry.swift in Sources */,
 				63BC967623F0E71D00FDED0B /* GlobalKeybaordShortcut.swift in Sources */,
+				6331A29324317DB50042511F /* RendezvousPoint.swift in Sources */,
 				636A085524147607005639DC /* StatusMenuController.swift in Sources */,
 				6327CDD622593C27006A73EF /* Defaults.swift in Sources */,
 				636A08572414856C005639DC /* PronunciationsViewController.swift in Sources */,
 				63A485582411441C00CBCAFB /* TranscriptViewController.swift in Sources */,
 				63360B8D241FC59100A84D86 /* Pronunciation.swift in Sources */,
 				63A0C5BC2239A3C200C996DD /* GeneralPreferencesViewController.swift in Sources */,
+				6331A29724317DDB0042511F /* SpeakerService.swift in Sources */,
 				63A0C5BA2239A3C200C996DD /* AppDelegate.swift in Sources */,
 				63275D452413D965008F0992 /* TranscriptDetailViewController.swift in Sources */,
 				63275D422413D8EA008F0992 /* TranscriptTableViewController.swift in Sources */,
@@ -193,7 +401,36 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6331A28724317CF70042511F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6331A26324317C940042511F /* Say It Helper */;
+			targetProxy = 6331A28624317CF70042511F /* PBXContainerItemProxy */;
+		};
+		6331A28A24317CF70042511F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6331A27524317CA30042511F /* Say It Service Provider */;
+			targetProxy = 6331A28924317CF70042511F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		6331A26A24317C970042511F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6331A26B24317C970042511F /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6331A27C24317CA60042511F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6331A27D24317CA60042511F /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		63A0C5BF2239A3C400C996DD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -205,6 +442,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6331A26F24317C970042511F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Say It Helper/Say It Helper.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Say It Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6331A27024317C970042511F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Say It Helper/Say It Helper.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Say It Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6331A28224317CA60042511F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Say It Service Provider/Say It Service Provider.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Say It Service Provider/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Service-Provider";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6331A28324317CA60042511F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Say It Service Provider/Say It Service Provider.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9K689XE65M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Say It Service Provider/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Service-Provider";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		63A0C5C42239A3C400C996DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -329,7 +650,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9K689XE65M;
-				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Say It/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -350,7 +671,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9K689XE65M;
-				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Say It/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -365,6 +686,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "Say It Helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6331A26F24317C970042511F /* Debug */,
+				6331A27024317C970042511F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6331A28124317CA60042511F /* Build configuration list for PBXNativeTarget "Say It Service Provider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6331A28224317CA60042511F /* Debug */,
+				6331A28324317CA60042511F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63A0C5B12239A3C200C996DD /* Build configuration list for PBXProject "Say It" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

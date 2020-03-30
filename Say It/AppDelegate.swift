@@ -7,11 +7,12 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 var appDelegate: AppDelegate!
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCListenerDelegate, SpeakerService {
     @IBOutlet var statusMenuController: StatusMenuController!
     var preferencesWindowController: NSWindowController!
     var transcriptWindowController: NSWindowController!
@@ -19,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
     var speaker = Speaker()
+
+    var listener: NSXPCListener! // TODO: switch this to let and initialize it on construction
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -31,9 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         appDelegate = self
     }
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSApp.servicesProvider = self
-
+    func applicationDidFinishLaunching(_ notification: Notification) {
         if !Defaults.showDock && NSApp.activationPolicy() != .accessory {
             NSApp.setActivationPolicy(.accessory)
         }
@@ -46,7 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         statusMenuController.registerCallbacks(speaker)
 
         stopSpeakingShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .shift]) { [weak self] shortcut in
-
             guard let self = self else {
                 return
             }
@@ -58,7 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
         }
 
         sayItFromClipboardShortcut = GlobalKeyboardShortcut(key: .quote, modifiers: [.command, .control]) { [weak self] shortcut in
-
             guard let self = self else {
                 return
             }
@@ -68,17 +67,51 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
                 self.statusMenuController.highlightMenu()
             }
         }
+
+        guard SMLoginItemSetEnabled("is.dave.Say-It-Helper" as CFString, true) else {
+            NSLog("xxxx Couldn't enable login item")
+            return
+        }
+
+        setupXPC()
+
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+    func applicationWillTerminate(_ notification: Notification) {
+        NSLog("Terminate")
+        SMLoginItemSetEnabled("is.dave.Say-It-Helper" as CFString, false)
     }
 
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        preferencesWindowController.window?.center()
-        preferencesWindowController.showWindow(self)
+    func setupXPC() {
+        let connection = NSXPCConnection(machServiceName: "is.dave.Say-It-Helper", options: [])
+        connection.remoteObjectInterface = NSXPCInterface(with: RendezvousPoint.self)
+        connection.resume()
 
-        return false
+        let service = connection.remoteObjectProxyWithErrorHandler { error in
+            NSLog("Received XPC error in app: \(error.localizedDescription) \(error)")
+        } as! RendezvousPoint
+
+        listener = NSXPCListener.anonymous()
+        listener.delegate = self
+        listener.resume()
+
+        NSLog("xxxx Send register app")
+        service.registerApp(endpoint: listener.endpoint)
+
+        connection.interruptionHandler = {
+            NSLog("xxxx XPC interrupt, helper probably restated, re-registering app")
+            service.registerApp(endpoint: self.listener.endpoint)
+        }
+    }
+
+    func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
+        NSLog("xxxx app: new connection")
+
+        newConnection.exportedInterface = NSXPCInterface(with: SpeakerService.self)
+        newConnection.exportedObject = self
+        newConnection.resume()
+
+        return true
     }
 
     func canStartSpeakingFromClipboard() -> Bool {
@@ -89,19 +122,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     @IBAction func startSpeakingFromClipboard(_ sender: Any?) {
-        var error: NSString?
-
-        startSpeaking(NSPasteboard.general, userData: nil, error: &error)
-    }
-
-    @objc func startSpeaking(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
-
-        NSWorkspace.shared.menuBarOwningApplication?.activate()
-
-        guard let items = pboard.pasteboardItems else { return }
+        guard let items = NSPasteboard.general.pasteboardItems else { return }
         guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")]) else { return }
 
         guard let s = items[0].string(forType: type) else { return }
+
+        startSpeaking(s)
+    }
+
+    func startSpeakingFromServiceProvider(_ s: String) {
+        DispatchQueue.main.async {
+            self.startSpeaking(s)
+        }
+    }
+
+    func startSpeaking(_ s: String) {
+        NSLog("xxxx app: start speaking")
 
         log.append(TranscriptEntry(date: Date(), text: s.trimmingCharacters(in: .whitespacesAndNewlines)))
 
@@ -110,7 +146,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
 
     @IBAction func stopSpeaking(_ sender: Any?) {
         speaker.stopSpeaking()
-
     }
 
     @IBAction func showPreferences(_ sender: Any) {
