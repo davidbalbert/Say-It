@@ -69,7 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
             }
         }
 
-        guard SMLoginItemSetEnabled("is.dave.Say-It-Helper" as CFString, true) else {
+        guard SMLoginItemSetEnabled("9K689XE65M.is.dave.Say-It-Helper" as CFString, true) else {
             NSLog("xxxx Couldn't enable login item")
             return
         }
@@ -81,11 +81,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
     func applicationWillTerminate(_ notification: Notification) {
         NSLog("Terminate")
         terminating = true
-        SMLoginItemSetEnabled("is.dave.Say-It-Helper" as CFString, false)
+        SMLoginItemSetEnabled("9K689XE65M.is.dave.Say-It-Helper" as CFString, false)
     }
 
     func setupXPC() {
-        let connection = NSXPCConnection(machServiceName: "is.dave.Say-It-Helper", options: [])
+        let connection = NSXPCConnection(machServiceName: "9K689XE65M.is.dave.Say-It-Helper", options: [])
         connection.remoteObjectInterface = NSXPCInterface(with: RendezvousPoint.self)
         connection.resume()
 

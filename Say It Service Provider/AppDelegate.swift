@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var directConnection: NSXPCConnection?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NSLog("xxxx service provider: launch")
         if appIsRunning() {
             setupXPC()
         } else {
@@ -33,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func setupXPC() {
-        let helperConnection = NSXPCConnection(machServiceName: "is.dave.Say-It-Helper", options: [])
+        let helperConnection = NSXPCConnection(machServiceName: "9K689XE65M.is.dave.Say-It-Helper", options: [])
         helperConnection.remoteObjectInterface = NSXPCInterface(with: RendezvousPoint.self)
         helperConnection.resume()
 
@@ -49,20 +50,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 directConnection.remoteObjectInterface = NSXPCInterface(with: SpeakerService.self)
                 directConnection.resume()
 
+                NSLog("xxxx service provider: after resume")
+
                 // If the main app quits, quit the service provider.
                 directConnection.interruptionHandler = {
+                    NSLog("xxxx sevice provider: interrupt, quitting")
                     NSApp.terminate(self)
                 }
 
                 self.directConnection = directConnection
 
+                NSLog("xxxx service provider: servicesProvider = self")
                 NSApp.servicesProvider = self
+                NSLog("xxxx service provider: ready")
             }
         }
     }
 
 
     @objc func startSpeaking(_ pboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
+        NSLog("xxxx service provider: start speaking")
 
         guard let items = pboard.pasteboardItems else { return }
         guard let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")]) else { return }

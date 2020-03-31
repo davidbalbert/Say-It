@@ -18,9 +18,9 @@
 		6331A27924317CA30042511F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A27824317CA30042511F /* AppDelegate.swift */; };
 		6331A27B24317CA60042511F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27A24317CA60042511F /* Assets.xcassets */; };
 		6331A27E24317CA60042511F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27C24317CA60042511F /* MainMenu.xib */; };
-		6331A28524317CF70042511F /* Say It Helper.app in Resources */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* Say It Helper.app */; };
+		6331A28524317CF70042511F /* 9K689XE65M.is.dave.Say-It-Helper.app in Resources */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper.app */; };
 		6331A28824317CF70042511F /* Say It Service Provider.app in Resources */ = {isa = PBXBuildFile; fileRef = 6331A27624317CA30042511F /* Say It Service Provider.app */; };
-		6331A28E24317D5D0042511F /* Say It Helper.app in Copy Login Items */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* Say It Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6331A28E24317D5D0042511F /* 9K689XE65M.is.dave.Say-It-Helper.app in Copy Login Items */ = {isa = PBXBuildFile; fileRef = 6331A26424317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6331A29024317D860042511F /* Say It Service Provider.app in Copy Service Provider */ = {isa = PBXBuildFile; fileRef = 6331A27624317CA30042511F /* Say It Service Provider.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6331A29324317DB50042511F /* RendezvousPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29224317DB50042511F /* RendezvousPoint.swift */; };
 		6331A29424317DB50042511F /* RendezvousPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331A29224317DB50042511F /* RendezvousPoint.swift */; };
@@ -63,7 +63,7 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				6331A28E24317D5D0042511F /* Say It Helper.app in Copy Login Items */,
+				6331A28E24317D5D0042511F /* 9K689XE65M.is.dave.Say-It-Helper.app in Copy Login Items */,
 			);
 			name = "Copy Login Items";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,7 +87,7 @@
 		63275D432413D965008F0992 /* TranscriptDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptDetailViewController.swift; sourceTree = "<group>"; };
 		63275D472414689F008F0992 /* TranscriptEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptEntry.swift; sourceTree = "<group>"; };
 		6327CDD522593C27006A73EF /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
-		6331A26424317C940042511F /* Say It Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Say It Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6331A26424317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "9K689XE65M.is.dave.Say-It-Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6331A26624317C940042511F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6331A26824317C970042511F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6331A26B24317C970042511F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				63A0C5B62239A3C200C996DD /* Say It.app */,
-				6331A26424317C940042511F /* Say It Helper.app */,
+				6331A26424317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper.app */,
 				6331A27624317CA30042511F /* Say It Service Provider.app */,
 			);
 			name = Products;
@@ -220,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6331A26324317C940042511F /* Say It Helper */ = {
+		6331A26324317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "Say It Helper" */;
+			buildConfigurationList = 6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "9K689XE65M.is.dave.Say-It-Helper" */;
 			buildPhases = (
 				6331A26024317C940042511F /* Sources */,
 				6331A26124317C940042511F /* Frameworks */,
@@ -232,9 +232,9 @@
 			);
 			dependencies = (
 			);
-			name = "Say It Helper";
+			name = "9K689XE65M.is.dave.Say-It-Helper";
 			productName = "Say It Helper";
-			productReference = 6331A26424317C940042511F /* Say It Helper.app */;
+			productReference = 6331A26424317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6331A27524317CA30042511F /* Say It Service Provider */ = {
@@ -319,7 +319,7 @@
 			projectRoot = "";
 			targets = (
 				63A0C5B52239A3C200C996DD /* Say It */,
-				6331A26324317C940042511F /* Say It Helper */,
+				6331A26324317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper */,
 				6331A27524317CA30042511F /* Say It Service Provider */,
 			);
 		};
@@ -349,7 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6331A28824317CF70042511F /* Say It Service Provider.app in Resources */,
-				6331A28524317CF70042511F /* Say It Helper.app in Resources */,
+				6331A28524317CF70042511F /* 9K689XE65M.is.dave.Say-It-Helper.app in Resources */,
 				63A0C5BE2239A3C400C996DD /* Assets.xcassets in Resources */,
 				63A0C5C12239A3C400C996DD /* Main.storyboard in Resources */,
 			);
@@ -404,7 +404,7 @@
 /* Begin PBXTargetDependency section */
 		6331A28724317CF70042511F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6331A26324317C940042511F /* Say It Helper */;
+			target = 6331A26324317C940042511F /* 9K689XE65M.is.dave.Say-It-Helper */;
 			targetProxy = 6331A28624317CF70042511F /* PBXContainerItemProxy */;
 		};
 		6331A28A24317CF70042511F /* PBXTargetDependency */ = {
@@ -457,7 +457,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = "9K689XE65M.is.dave.Say-It-Helper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -478,7 +478,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "is.dave.Say-It-Helper";
+				PRODUCT_BUNDLE_IDENTIFIER = "9K689XE65M.is.dave.Say-It-Helper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -686,7 +686,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "Say It Helper" */ = {
+		6331A27124317C970042511F /* Build configuration list for PBXNativeTarget "9K689XE65M.is.dave.Say-It-Helper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6331A26F24317C970042511F /* Debug */,
