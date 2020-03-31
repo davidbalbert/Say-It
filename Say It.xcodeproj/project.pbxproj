@@ -113,6 +113,7 @@
 		63A0C5C22239A3C400C996DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63A485572411441C00CBCAFB /* TranscriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptViewController.swift; sourceTree = "<group>"; };
 		63BC967523F0E71D00FDED0B /* GlobalKeybaordShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybaordShortcut.swift; sourceTree = "<group>"; };
+		63D6EC91243398370068FF16 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +177,7 @@
 		63A0C5AD2239A3C200C996DD = {
 			isa = PBXGroup;
 			children = (
+				63D6EC91243398370068FF16 /* .gitignore */,
 				6331A29124317D920042511F /* Common */,
 				63A0C5B82239A3C200C996DD /* Say It */,
 				6331A26524317C940042511F /* Say It Helper */,
