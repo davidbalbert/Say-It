@@ -19,10 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
     var statusItem: NSStatusItem!
     var stopSpeakingShortcut: GlobalKeyboardShortcut!
     var sayItFromClipboardShortcut: GlobalKeyboardShortcut!
+
     var speaker = Speaker()
     var terminating = false
-
-    var listener: NSXPCListener! // TODO: switch this to let and initialize it on construction
+    var listener = NSXPCListener.anonymous()
 
     var log: [TranscriptEntry] = [] {
         didSet {
@@ -93,7 +93,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
             NSLog("Received XPC error in app: \(error.localizedDescription) \(error)")
         } as! RendezvousPoint
 
-        listener = NSXPCListener.anonymous()
         listener.delegate = self
         listener.resume()
 
