@@ -48,7 +48,7 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
         completionHandlers.removeValue(forKey: id)
     }
 
-    func startSpeaking(_ s: String) {
+    func startSpeaking(_ s: String, withoutSubstitutingPronunciations skipSubstitute: Bool = false) {
         if let synth = synth, synth.isSpeaking {
             // speechSynthesizer:didFinishSpeaking: seems to get called asynchronously
             // after we return to the run loop. That would mean if we start speaking
@@ -76,7 +76,11 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
             handler()
         }
 
-        synth.startSpeaking(substitutePronunciations(s))
+        if (skipSubstitute) {
+            synth.startSpeaking(s)
+        } else {
+            synth.startSpeaking(substitutePronunciations(s))
+        }
     }
 
     func substitutePronunciations(_ s: String) ->  String {

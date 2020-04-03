@@ -11,7 +11,8 @@ import Cocoa
 class PreferencesViewController: NSTabViewController {
     override func viewDidLoad() {
         // Super.viewDidLoad() selects tabIndex 0, which will overwrite
-        // our saved preference. Load the preference
+        // our saved preference. Load the preference, then call super,
+        // and finally, restore the preference.
         let i = Defaults.selectedPreferenceTabIndex
 
         super.viewDidLoad()

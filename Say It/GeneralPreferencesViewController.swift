@@ -63,6 +63,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     }
 
     override func viewWillAppear() {
+        super.viewWillAppear()
+
         speakerBeginId = appDelegate.speaker.addBeginHandler { [weak self] in
             self?.speaking = true
         }
@@ -75,6 +77,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     }
 
     override func viewWillDisappear() {
+        super.viewWillDisappear()
+        
         appDelegate.speaker.removeBeginHandler(speakerBeginId)
         appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
     }

@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import os.log
 
 class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     @IBOutlet var tableView: NSTableView!
@@ -21,12 +20,67 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             } else {
                 addRemove.setEnabled(true, forSegment: 1)
             }
+
+            setVisibilityForAllButtons()
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do view setup here.
+    var speakerBeginId: UUID!
+    var speakerCompletionId: UUID!
+    var speaking = false {
+        didSet {
+            if speaking {
+                setEnabledForAllButtons(false)
+            } else {
+                setEnabledForAllButtons(true)
+            }
+        }
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        speakerBeginId = appDelegate.speaker.addBeginHandler { [weak self] in
+            self?.speaking = true
+        }
+
+        speakerCompletionId = appDelegate.speaker.addCompletionHandler { [weak self] in
+            self?.speaking = false
+        }
+
+
+        setVisibilityForAllButtons()
+        speaking = appDelegate.speaker.isSpeaking
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+
+        appDelegate.speaker.removeBeginHandler(speakerBeginId)
+        appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
+    }
+
+    func setEnabledForAllButtons(_ enabled: Bool) {
+        for row in 0..<Defaults.pronunciations.count {
+            let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+            view?.button.isEnabled = enabled
+        }
+    }
+
+    func setVisibilityForAllButtons() {
+        for row in 0..<Defaults.pronunciations.count {
+            setVisibilityForButton(at: row)
+        }
+    }
+
+    func setVisibilityForButton(at row: Int) {
+        let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+
+        if selection.contains(row) {
+            view?.button.isHidden = false
+        } else {
+            view?.button.isHidden = true
+        }
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -36,7 +90,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let p = Defaults.pronunciations[row]
         let identifier: String
-        let value: String
+        let value: String?
 
         if tableColumn == tableView.tableColumns[0] {
             identifier = "Replace"
@@ -44,6 +98,9 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         } else if tableColumn == tableView.tableColumns[1] {
             identifier = "With"
             value = p.to
+        } else if tableColumn == tableView.tableColumns[2] {
+            identifier = "Test"
+            value = nil
         } else {
             return nil
         }
@@ -52,7 +109,9 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             return nil
         }
 
-        cell.textField?.stringValue = value
+        if let value = value {
+            cell.textField?.stringValue = value
+        }
 
         return cell
     }
@@ -116,6 +175,25 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
 
             justDeleted = false
+        }
+    }
+
+    @IBAction func testPronunciation(_ sender: NSButton) {
+        var p: Pronunciation?
+
+        for row in selection {
+            let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+
+            if sender == view?.button {
+                p = Defaults.pronunciations[row]
+                break
+            }
+        }
+
+        if let p = p {
+            // Use speaker.startSpeaking rather than appDelegate.startSpeaking
+            // to skip adding to the transcript.
+            appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
         }
     }
 }
