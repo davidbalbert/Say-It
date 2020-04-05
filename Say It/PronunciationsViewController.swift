@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, NSControlTextEditingDelegate {
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var addRemove: NSSegmentedControl!
     var justDeleted = false
@@ -81,6 +81,23 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         view?.button.isHidden = !visible
     }
 
+    func setVisibilityForButtonWhileEditing(row: Int, column col: Int, value string: String) {
+        guard let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView else {
+            return
+        }
+
+        var p = Defaults.pronunciations[row]
+
+        if col == 0 {
+            p.from = string
+        } else if col == 1 {
+            p.to = string
+        }
+
+        view.button.isHidden = p.from.isEmpty || p.to.isEmpty
+    }
+
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         Defaults.pronunciations.count
     }
@@ -150,6 +167,37 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         Defaults.pronunciations = ps
 
         setVisibilityForButton(at: row)
+    }
+
+    func controlTextDidChange(_ notification: Notification) {
+        guard let textField = notification.object as? NSTextField else {
+            return
+        }
+
+        guard let fieldEditor = notification.userInfo?["NSFieldEditor"] as? NSText else {
+            return
+        }
+
+        let row = tableView.selectedRow
+        let col = tableView.column(for: textField)
+
+        setVisibilityForButtonWhileEditing(row: row, column: col, value: fieldEditor.string)
+    }
+
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(control.cancelOperation(_:)) {
+            let row = tableView.selectedRow
+            let col = tableView.column(for: control)
+            let p = Defaults.pronunciations[row]
+
+            if col == 0 {
+                setVisibilityForButtonWhileEditing(row: row, column: col, value: p.from)
+            } else if col == 1 {
+                setVisibilityForButtonWhileEditing(row: row, column: col, value: p.to)
+            }
+        }
+
+        return false
     }
 
     @IBAction func addOrRemoveRow(_ sender: Any) {

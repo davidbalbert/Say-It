@@ -641,6 +641,7 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <action selector="updateFrom:" target="vmv-sm-lge" id="w1d-b9-rkv"/>
+                                                                        <outlet property="delegate" destination="vmv-sm-lge" id="fQJ-SK-42O"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -683,6 +684,7 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <action selector="updateTo:" target="vmv-sm-lge" id="sGc-yA-t5x"/>
+                                                                        <outlet property="delegate" destination="vmv-sm-lge" id="jsk-H0-W2H"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
