@@ -74,13 +74,11 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     func setVisibilityForButton(at row: Int) {
+        let p = Defaults.pronunciations[row]
+        let visible = selection.contains(row) && !p.from.isEmpty && !p.to.isEmpty
         let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
 
-        if selection.contains(row) {
-            view?.button.isHidden = false
-        } else {
-            view?.button.isHidden = true
-        }
+        view?.button.isHidden = !visible
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -136,6 +134,8 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         var ps = Defaults.pronunciations
         ps[row].from = sender.stringValue
         Defaults.pronunciations = ps
+
+        setVisibilityForButton(at: row)
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
@@ -148,6 +148,8 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         var ps = Defaults.pronunciations
         ps[row].to = sender.stringValue
         Defaults.pronunciations = ps
+
+        setVisibilityForButton(at: row)
     }
 
     @IBAction func addOrRemoveRow(_ sender: Any) {
