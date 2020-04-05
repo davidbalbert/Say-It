@@ -69,34 +69,16 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func setVisibilityForAllButtons() {
         for row in 0..<Defaults.pronunciations.count {
-            setVisibilityForButton(at: row)
+            setVisibilityForButton(at: row, pronunciation: Defaults.pronunciations[row])
         }
     }
 
-    func setVisibilityForButton(at row: Int) {
-        let p = Defaults.pronunciations[row]
+    func setVisibilityForButton(at row: Int, pronunciation p: Pronunciation) {
         let visible = selection.contains(row) && !p.from.isEmpty && !p.to.isEmpty
         let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
 
         view?.button.isHidden = !visible
     }
-
-    func setVisibilityForButtonWhileEditing(row: Int, column col: Int, value string: String) {
-        guard let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView else {
-            return
-        }
-
-        var p = Defaults.pronunciations[row]
-
-        if col == 0 {
-            p.from = string
-        } else if col == 1 {
-            p.to = string
-        }
-
-        view.button.isHidden = p.from.isEmpty || p.to.isEmpty
-    }
-
 
     func numberOfRows(in tableView: NSTableView) -> Int {
         Defaults.pronunciations.count
@@ -151,8 +133,6 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         var ps = Defaults.pronunciations
         ps[row].from = sender.stringValue
         Defaults.pronunciations = ps
-
-        setVisibilityForButton(at: row)
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
@@ -165,8 +145,6 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         var ps = Defaults.pronunciations
         ps[row].to = sender.stringValue
         Defaults.pronunciations = ps
-
-        setVisibilityForButton(at: row)
     }
 
     func controlTextDidChange(_ notification: Notification) {
@@ -180,27 +158,27 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
         let row = tableView.selectedRow
         let col = tableView.column(for: textField)
+        var p = Defaults.pronunciations[row]
 
         // Reading textField.stringValue makes the text field forget its original (pre-editing) value
         // and replaces it with the current value of the field editor. This breaks canceling the edit
         // by pressing escape: the new value remains in the textField even though we canceled. Instead,
         // we read the value directly from the field editor.
-        setVisibilityForButtonWhileEditing(row: row, column: col, value: fieldEditor.string)
+        if col == 0 {
+            p.from = fieldEditor.string
+        } else if col == 1 {
+            p.to = fieldEditor.string
+        }
+
+        setVisibilityForButton(at: row, pronunciation: p)
     }
 
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         // Set the button visiblity when the user cancels editing by pressing escape. In this
-        // situation, neither controlTextDidChange or controlTextDidEndEditing are triggered.
+        // situation, controlTextDidEndEditing are triggered, so we use this method instead.
         if commandSelector == #selector(control.cancelOperation(_:)) {
             let row = tableView.selectedRow
-            let col = tableView.column(for: control)
-            let p = Defaults.pronunciations[row]
-
-            if col == 0 {
-                setVisibilityForButtonWhileEditing(row: row, column: col, value: p.from)
-            } else if col == 1 {
-                setVisibilityForButtonWhileEditing(row: row, column: col, value: p.to)
-            }
+            setVisibilityForButton(at: row, pronunciation: Defaults.pronunciations[row])
         }
 
         return false
@@ -229,7 +207,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             a.removeObjects(at: s)
             Defaults.pronunciations = a as NSArray as! [Pronunciation]
 
-            // HACK: make sure we ignore the text view action that gets fired when we delete a row
+            // HACK: make sure we ignore the textField's action that gets fired when we delete a row
             // while we're editing a cell.
             justDeleted = true
 
