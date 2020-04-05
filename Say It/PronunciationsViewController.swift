@@ -116,6 +116,12 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         return cell
     }
 
+    // Makes sure the "Test" button appears as soon as a row appears selected
+    func tableViewSelectionIsChanging(_ notification: Notification) {
+        selection = tableView.selectedRowIndexes
+    }
+
+    // Makes sure the "Test" button appears when the selection is changed with the keyboard
     func tableViewSelectionDidChange(_ notification: Notification) {
         selection = tableView.selectedRowIndexes
     }
