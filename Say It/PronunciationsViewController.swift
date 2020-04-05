@@ -181,10 +181,16 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         let row = tableView.selectedRow
         let col = tableView.column(for: textField)
 
+        // Reading textField.stringValue makes the text field forget its original (pre-editing) value
+        // and replaces it with the current value of the field editor. This breaks canceling the edit
+        // by pressing escape: the new value remains in the textField even though we canceled. Instead,
+        // we read the value directly from the field editor.
         setVisibilityForButtonWhileEditing(row: row, column: col, value: fieldEditor.string)
     }
 
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        // Set the button visiblity when the user cancels editing by pressing escape. In this
+        // situation, neither controlTextDidChange or controlTextDidEndEditing are triggered.
         if commandSelector == #selector(control.cancelOperation(_:)) {
             let row = tableView.selectedRow
             let col = tableView.column(for: control)
