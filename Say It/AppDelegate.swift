@@ -152,8 +152,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
     }
 
     @IBAction func showPreferences(_ sender: Any) {
-        preferencesWindowController.window?.center()
-        preferencesWindowController.showWindow(self)
+        let visible = preferencesWindowController.window?.isVisible ?? false
+
+        if !visible {
+            preferencesWindowController.window?.center()
+            preferencesWindowController.showWindow(self)
+        }
+
         NSApp.activate(ignoringOtherApps: true)
     }
 
