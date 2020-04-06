@@ -152,7 +152,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             return
         }
 
-        guard let fieldEditor = notification.userInfo?["NSFieldEditor"] as? NSText else {
+        guard let fieldEditor = notification.userInfo?["NSFieldEditor"] as? NSTextView else {
             return
         }
 
