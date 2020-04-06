@@ -184,60 +184,75 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         return false
     }
 
+    override func keyDown(with event: NSEvent) {
+        let delete = Character(UnicodeScalar(NSDeleteCharacter)!)
+
+        if event.charactersIgnoringModifiers?.first == delete && !selection.isEmpty {
+            removeSelectedRows()
+        } else {
+            super.keyDown(with: event)
+        }
+    }
+
     @IBAction func addOrRemoveRow(_ sender: Any) {
         if addRemove.isSelected(forSegment: 0) {
-            var ps = Defaults.pronunciations
-
-            if (ps.isEmpty || !ps.last!.isBlank) {
-                ps.append(Pronunciation(from: "", to: ""))
-                Defaults.pronunciations = ps
-
-                tableView.insertRows(at: IndexSet(integer: ps.count-1))
-            }
-
-            tableView.selectRowIndexes(IndexSet(integer: ps.count-1), byExtendingSelection: false)
-
-            let cell = tableView.rowView(atRow: ps.count-1, makeIfNecessary: false)!.view(atColumn: 0) as! NSTableCellView
-
-            cell.textField?.becomeFirstResponder()
+            addRowIfNecessary()
         } else {
-            let s = selection
-
-            let a = NSMutableArray(array: Defaults.pronunciations)
-            a.removeObjects(at: s)
-            Defaults.pronunciations = a as NSArray as! [Pronunciation]
-
-            // HACK: make sure we ignore the textField's action that gets fired when we delete a row
-            // while we're editing a cell.
-            justDeleted = true
-
-            tableView.removeRows(at: s)
-            tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
-
-            justDeleted = false
+            removeSelectedRows()
         }
+    }
+
+    func addRowIfNecessary() {
+        var ps = Defaults.pronunciations
+
+        if (ps.isEmpty || !ps.last!.isBlank) {
+            ps.append(Pronunciation(from: "", to: ""))
+            Defaults.pronunciations = ps
+
+            tableView.insertRows(at: IndexSet(integer: ps.count-1))
+        }
+
+        tableView.selectRowIndexes(IndexSet(integer: ps.count-1), byExtendingSelection: false)
+
+        guard let view = tableView.view(atColumn: 0, row: ps.count-1, makeIfNecessary: false) as? NSTableCellView else {
+            return
+        }
+
+        if view.textField?.acceptsFirstResponder ?? false {
+            view.window?.makeFirstResponder(view.textField)
+        }
+    }
+
+    func removeSelectedRows() {
+        let s = selection
+
+        let a = NSMutableArray(array: Defaults.pronunciations)
+        a.removeObjects(at: s)
+        Defaults.pronunciations = a as NSArray as! [Pronunciation]
+
+        // HACK: make sure we ignore the textField's action that gets fired when we delete a row
+        // while we're editing a cell.
+        justDeleted = true
+
+        tableView.removeRows(at: s)
+        tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
+
+        justDeleted = false
     }
 
     // (clickedRow, clickedColumn)
     //
     // (-1, -1) -> background
-    // (-1, n)  -> header column n
+    // (-1, m)  -> header column m
     // (n, m)   -> row n, column m
     @IBAction func handleDoubleClick(_ sender: NSTableView) {
         let row = tableView.clickedRow
         let col = tableView.clickedColumn
-        print("doubleClick \(row) \(col)")
 
         if (row == -1 && col == -1) {
-            print("background")
+            addRowIfNecessary()
         } else if (row > -1) {
-            guard let view = tableView.view(atColumn: col, row: row, makeIfNecessary: false) as? NSTableCellView else {
-                return
-            }
-
-            if view.textField?.acceptsFirstResponder ?? false {
-                view.window?.makeFirstResponder(view.textField)
-            }
+            tableView.editColumn(col, row: row, with: nil, select: false)
         }
     }
 
