@@ -218,6 +218,29 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         }
     }
 
+    // (clickedRow, clickedColumn)
+    //
+    // (-1, -1) -> background
+    // (-1, n)  -> header column n
+    // (n, m)   -> row n, column m
+    @IBAction func handleDoubleClick(_ sender: NSTableView) {
+        let row = tableView.clickedRow
+        let col = tableView.clickedColumn
+        print("doubleClick \(row) \(col)")
+
+        if (row == -1 && col == -1) {
+            print("background")
+        } else if (row > -1) {
+            guard let view = tableView.view(atColumn: col, row: row, makeIfNecessary: false) as? NSTableCellView else {
+                return
+            }
+
+            if view.textField?.acceptsFirstResponder ?? false {
+                view.window?.makeFirstResponder(view.textField)
+            }
+        }
+    }
+
     @IBAction func testPronunciation(_ sender: NSButton) {
         var p: Pronunciation?
 

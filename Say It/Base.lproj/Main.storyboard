@@ -735,6 +735,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <action trigger="doubleAction" selector="handleDoubleClick:" target="vmv-sm-lge" id="K80-tW-ztw"/>
                                                 <outlet property="dataSource" destination="vmv-sm-lge" id="eKt-WE-s0d"/>
                                                 <outlet property="delegate" destination="vmv-sm-lge" id="01D-La-mbY"/>
                                             </connections>
