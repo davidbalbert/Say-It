@@ -255,10 +255,28 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         let row = tableView.clickedRow
         let col = tableView.clickedColumn
 
-        if (row == -1 && col == -1) {
+        if row == -1 && col == -1 {
             addRowIfNecessary()
-        } else if (row > -1) {
-            tableView.editColumn(col, row: row, with: nil, select: false)
+        } else if let event = NSApp.currentEvent, row > -1 {
+            edit(row: row, column: col, with: event)
+        }
+    }
+
+    func edit(row: Int, column col: Int, with event: NSEvent) {
+        guard let cellView = tableView.view(atColumn: col, row: row, makeIfNecessary: false) as? NSTableCellView else {
+            return
+        }
+
+        if let cellView = cellView as? ButtonTableCellView {
+            guard let p = cellView.superview?.convert(event.locationInWindow, from: nil) else {
+                return
+            }
+
+            if let button = cellView.hitTest(p) as? NSButton {
+                button.performClick(self)
+            }
+        } else {
+            view.window?.makeFirstResponder(cellView.textField)
         }
     }
 
