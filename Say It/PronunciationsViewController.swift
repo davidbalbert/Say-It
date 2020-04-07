@@ -281,8 +281,6 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     @IBAction func testPronunciation(_ sender: NSButton) {
-        var p: Pronunciation?
-
         // If we're editing a cell when we click the test button,
         // make sure to stop editing.
         view.window?.makeFirstResponder(tableView)
@@ -291,15 +289,14 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
 
             if sender == view?.button {
-                p = Defaults.pronunciations[row]
-                break
-            }
-        }
+                let p = Defaults.pronunciations[row]
 
-        if let p = p {
-            // Use speaker.startSpeaking rather than appDelegate.startSpeaking
-            // to skip adding to the transcript.
-            appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
+                // Use speaker.startSpeaking rather than appDelegate.startSpeaking
+                // to skip adding to the transcript.
+                appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
+
+                return
+            }
         }
     }
 }
