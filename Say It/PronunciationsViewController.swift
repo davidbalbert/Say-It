@@ -152,7 +152,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             return
         }
 
-        guard let fieldEditor = notification.userInfo?["NSFieldEditor"] as? NSTextView else {
+        guard let fieldEditor = notification.userInfo?["NSFieldEditor"] as? NSText else {
             return
         }
 
@@ -258,6 +258,10 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     @IBAction func testPronunciation(_ sender: NSButton) {
         var p: Pronunciation?
+
+        // If we're editing a cell when we click the test button,
+        // make sure to stop editing.
+        view.window?.makeFirstResponder(tableView)
 
         for row in selection {
             let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
