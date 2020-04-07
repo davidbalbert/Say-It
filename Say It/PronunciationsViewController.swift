@@ -113,12 +113,18 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         return cell
     }
 
-    // Makes sure the "Test" button appears as soon as a row appears selected
+    // If you're editing a text field when you click a column, make sure the edit finishes
+    // before the row is deselected. This prevents a crash.
+    func tableView(_ tableView: NSTableView, mouseDownInHeaderOf tableColumn: NSTableColumn) {
+        view.window?.makeFirstResponder(tableView)
+    }
+
+    // Make sure the "Test" button appears as soon as a row appears selected
     func tableViewSelectionIsChanging(_ notification: Notification) {
         selection = tableView.selectedRowIndexes
     }
 
-    // Makes sure the "Test" button appears when the selection is changed with the keyboard
+    // Make sure the "Test" button appears when the selection is changed with the keyboard
     func tableViewSelectionDidChange(_ notification: Notification) {
         selection = tableView.selectedRowIndexes
     }
