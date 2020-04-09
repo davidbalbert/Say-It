@@ -1,5 +1,5 @@
 //
-//  PronounciationsViewController.swift
+//  PronunciationsViewController.swift
 //  Say It
 //
 //  Created by David Albert on 3/7/20.
@@ -180,7 +180,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
-        // Set the button visiblity when the user cancels editing by pressing escape. In this
+        // Set the button visibility when the user cancels editing by pressing escape. In this
         // situation, controlTextDidEndEditing are triggered, so we use this method instead.
         if commandSelector == #selector(control.cancelOperation(_:)) {
             let row = tableView.selectedRow
@@ -212,11 +212,11 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         var ps = Defaults.pronunciations
 
         if (ps.isEmpty || !ps.last!.isBlank) {
-            ps.append(Pronunciation(from: "", to: ""))
-            Defaults.pronunciations = ps
-
-            tableView.insertRows(at: IndexSet(integer: ps.count-1))
+            let i = IndexSet(integer: ps.count)
+            addRows([Pronunciation(from: "", to: "")], at: i)
         }
+
+        ps = Defaults.pronunciations
 
         tableView.selectRowIndexes(IndexSet(integer: ps.count-1), byExtendingSelection: false)
 
@@ -232,18 +232,46 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     func removeSelectedRows() {
         let s = selection
 
-        let a = NSMutableArray(array: Defaults.pronunciations)
-        a.removeObjects(at: s)
-        Defaults.pronunciations = a as NSArray as! [Pronunciation]
-
         // HACK: make sure we ignore the textField's action that gets fired when we delete a row
         // while we're editing a cell.
         justDeleted = true
 
-        tableView.removeRows(at: s)
+        removeRows(at: s)
         tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
 
         justDeleted = false
+    }
+
+    func addRows(_ rows: [Pronunciation], at indexes: IndexSet) {
+        var ps = Defaults.pronunciations
+
+        for (i, p) in zip(indexes, rows) {
+            ps.insert(p, at: i)
+        }
+
+        Defaults.pronunciations = ps
+
+        tableView.insertRows(at: indexes)
+
+        undoManager?.registerUndo(withTarget: self) { target in
+            target.removeRows(at: indexes)
+        }
+    }
+
+    func removeRows(at indexes: IndexSet) {
+        let a = NSMutableArray(array: Defaults.pronunciations)
+
+        let removed = a.objects(at: indexes) as! [Pronunciation]
+        a.removeObjects(at: indexes)
+
+        Defaults.pronunciations = a as NSArray as! [Pronunciation]
+
+        tableView.removeRows(at: indexes)
+
+        undoManager?.registerUndo(withTarget: self) { target in
+            target.addRows(removed, at: indexes)
+            self.tableView.selectRowIndexes(indexes, byExtendingSelection: false)
+        }
     }
 
     // (clickedRow, clickedColumn)
