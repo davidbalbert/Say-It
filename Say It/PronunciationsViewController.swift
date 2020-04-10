@@ -136,9 +136,10 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
         let row = tableView.selectedRow
 
-        var ps = Defaults.pronunciations
-        ps[row].from = sender.stringValue
-        Defaults.pronunciations = ps
+        var p = Defaults.pronunciations[row]
+        p.from = sender.stringValue
+
+        set(p, at: row)
     }
 
     @IBAction func updateTo(_ sender: NSTextField) {
@@ -148,9 +149,31 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
         let row = tableView.selectedRow
 
+        var p = Defaults.pronunciations[row]
+        p.to = sender.stringValue
+
+        set(p, at: row)
+    }
+
+    func set(_ new: Pronunciation, at row: Int, reloadTableRow reload: Bool = false) {
         var ps = Defaults.pronunciations
-        ps[row].to = sender.stringValue
+        let old = ps[row]
+
+        if (old == new) {
+            return
+        }
+
+        ps[row] = new
         Defaults.pronunciations = ps
+
+        if reload {
+            tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(0..<tableView.numberOfColumns))
+            setVisibilityForButton(at: row, pronunciation: new)
+        }
+
+        undoManager?.registerUndo(withTarget: self) { target in
+            target.set(old, at: row, reloadTableRow: true)
+        }
     }
 
     func controlTextDidChange(_ notification: Notification) {
@@ -230,13 +253,11 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     func removeSelectedRows() {
-        let s = selection
-
         // HACK: make sure we ignore the textField's action that gets fired when we delete a row
         // while we're editing a cell.
         justDeleted = true
 
-        removeRows(at: s)
+        removeRows(at: selection)
 
         justDeleted = false
     }
