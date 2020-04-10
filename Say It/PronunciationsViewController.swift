@@ -237,7 +237,6 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         justDeleted = true
 
         removeRows(at: s)
-        tableView.selectRowIndexes(IndexSet(integer: s.first! - 1), byExtendingSelection: false)
 
         justDeleted = false
     }
@@ -264,6 +263,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         Defaults.pronunciations = a as NSArray as! [Pronunciation]
 
         tableView.removeRows(at: indexes)
+        tableView.selectRowIndexes(IndexSet(integer: indexes.last! - indexes.count), byExtendingSelection: false)
 
         undoManager?.registerUndo(withTarget: self) { target in
             target.addRows(removed, at: indexes)
