@@ -243,13 +243,10 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     func addRows(_ rows: [Pronunciation], at indexes: IndexSet) {
-        var ps = Defaults.pronunciations
+        let a = NSMutableArray(array: Defaults.pronunciations)
 
-        for (i, p) in zip(indexes, rows) {
-            ps.insert(p, at: i)
-        }
-
-        Defaults.pronunciations = ps
+        a.insert(rows, at: indexes)
+        Defaults.pronunciations = a as NSArray as! [Pronunciation]
 
         tableView.insertRows(at: indexes)
 
