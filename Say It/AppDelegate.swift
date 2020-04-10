@@ -118,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
     }
 
     func canStartSpeakingFromClipboard() -> Bool {
-        guard let items = NSPasteboard.general.pasteboardItems else { return false }
+        guard let items = NSPasteboard.general.pasteboardItems, items.count > 0 else { return false }
         let type = items[0].availableType(from: [NSPasteboard.PasteboardType(rawValue: "public.plain-text")])
 
         return type != nil
