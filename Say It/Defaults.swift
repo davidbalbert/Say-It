@@ -51,7 +51,7 @@ struct Defaults {
                 return _pronunciations
             }
 
-            guard let a = UserDefaults.standard.array(forKey: "pronunciations") as? [Dictionary<String, String>] else {
+            guard let a = UserDefaults.standard.array(forKey: "pronunciations") as? [Dictionary<String, Any>] else {
                 return []
             }
 

@@ -62,7 +62,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func setEnabledForAllButtons(_ enabled: Bool) {
         for row in 0..<Defaults.pronunciations.count {
-            let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+            let view = tableView.view(atColumn: 3, row: row, makeIfNecessary: false) as? ButtonTableCellView
             view?.button.isEnabled = enabled
         }
     }
@@ -75,7 +75,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func setVisibilityForButton(at row: Int, pronunciation p: Pronunciation) {
         let visible = selection.contains(row) && !p.from.isEmpty && !p.to.isEmpty
-        let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+        let view = tableView.view(atColumn: 3, row: row, makeIfNecessary: false) as? ButtonTableCellView
 
         view?.button.isHidden = !visible
     }
@@ -96,6 +96,9 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             identifier = "With"
             value = p.to
         } else if tableColumn == tableView.tableColumns[2] {
+            identifier = "CaseSensitive"
+            value = nil
+        } else if tableColumn == tableView.tableColumns[3] {
             identifier = "Test"
             value = nil
         } else {
@@ -153,6 +156,10 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         p.to = sender.stringValue
 
         set(p, at: row)
+    }
+
+    @IBAction func updateCaseSensitive(_ sender: NSButton) {
+        print("updateCaseSensitive row=\(tableView.row(for: sender)) state=\(sender.state)")
     }
 
     func set(_ new: Pronunciation, at row: Int, reloadTableRow reload: Bool = false) {
@@ -236,7 +243,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
         if (ps.isEmpty || !ps.last!.isBlank) {
             let i = IndexSet(integer: ps.count)
-            addRows([Pronunciation(from: "", to: "")], at: i)
+            addRows([Pronunciation(from: "", to: "", caseSensitive: false)], at: i)
         }
 
         ps = Defaults.pronunciations
