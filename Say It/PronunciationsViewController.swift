@@ -84,33 +84,28 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         Defaults.pronunciations.count
     }
 
+    private let fromIdentifier = NSUserInterfaceItemIdentifier(rawValue: "From")
+    private let toIdentifier = NSUserInterfaceItemIdentifier(rawValue: "To")
+    private let caseSensitiveIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CaseSensitive")
+    private let testIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Test")
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let p = Defaults.pronunciations[row]
-        let identifier: String
-        let value: String?
 
-        if tableColumn == tableView.tableColumns[0] {
-            identifier = "Replace"
-            value = p.from
-        } else if tableColumn == tableView.tableColumns[1] {
-            identifier = "With"
-            value = p.to
-        } else if tableColumn == tableView.tableColumns[2] {
-            identifier = "CaseSensitive"
-            value = nil
-        } else if tableColumn == tableView.tableColumns[3] {
-            identifier = "Test"
-            value = nil
-        } else {
+        guard let tableColumn = tableColumn else {
             return nil
         }
 
-        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: identifier), owner: self) as? NSTableCellView else {
+        guard let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: self) as? NSTableCellView else {
             return nil
         }
 
-        if let value = value {
-            cell.textField?.stringValue = value
+        if tableColumn.identifier == fromIdentifier {
+            cell.textField?.stringValue = p.from
+        } else if tableColumn.identifier == toIdentifier {
+            cell.textField?.stringValue = p.to
+        } else if tableColumn.identifier == caseSensitiveIdentifier, let cell = cell as? ButtonTableCellView {
+            cell.button.state = p.caseSensitive ? .on : .off
         }
 
         return cell
@@ -159,7 +154,12 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     @IBAction func updateCaseSensitive(_ sender: NSButton) {
-        print("updateCaseSensitive row=\(tableView.row(for: sender)) state=\(sender.state)")
+        let row = tableView.row(for: sender)
+
+        var p = Defaults.pronunciations[row]
+        p.caseSensitive = sender.state == .on
+
+        set(p, at: row)
     }
 
     func set(_ new: Pronunciation, at row: Int, reloadTableRow reload: Bool = false) {
@@ -338,18 +338,11 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         // make sure to stop editing.
         view.window?.makeFirstResponder(tableView)
 
-        for row in selection {
-            let view = tableView.view(atColumn: 2, row: row, makeIfNecessary: false) as? ButtonTableCellView
+        let row = tableView.row(for: sender)
+        let p = Defaults.pronunciations[row]
 
-            if sender == view?.button {
-                let p = Defaults.pronunciations[row]
-
-                // Use speaker.startSpeaking rather than appDelegate.startSpeaking
-                // to skip adding to the transcript.
-                appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
-
-                return
-            }
-        }
+        // Use speaker.startSpeaking rather than appDelegate.startSpeaking
+        // to skip adding to the transcript.
+        appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
     }
 }
