@@ -13,6 +13,8 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     @IBOutlet var addRemove: NSSegmentedControl!
     var justDeleted = false
 
+    private static let testColumn = 3
+
     var selection = IndexSet() {
         didSet {
             if selection.isEmpty {
@@ -62,7 +64,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func setEnabledForAllButtons(_ enabled: Bool) {
         for row in 0..<Defaults.pronunciations.count {
-            let view = tableView.view(atColumn: 3, row: row, makeIfNecessary: false) as? ButtonTableCellView
+            let view = tableView.view(atColumn: PronunciationsViewController.testColumn, row: row, makeIfNecessary: false) as? ButtonTableCellView
             view?.button.isEnabled = enabled
         }
     }
@@ -75,7 +77,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func setVisibilityForButton(at row: Int, pronunciation p: Pronunciation) {
         let visible = selection.contains(row) && !p.from.isEmpty && !p.to.isEmpty
-        let view = tableView.view(atColumn: 3, row: row, makeIfNecessary: false) as? ButtonTableCellView
+        let view = tableView.view(atColumn: PronunciationsViewController.testColumn, row: row, makeIfNecessary: false) as? ButtonTableCellView
 
         view?.button.isHidden = !visible
     }
