@@ -91,7 +91,7 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
                 continue
             }
 
-            res = res.replacingOccurrences(of: p.from, with: p.to)
+            res = res.replacingOccurrences(of: p.from, with: p.to, options: p.caseSensitive ? [] : .caseInsensitive)
         }
 
         return res

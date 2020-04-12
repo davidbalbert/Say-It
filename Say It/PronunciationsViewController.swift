@@ -84,6 +84,7 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         Defaults.pronunciations.count
     }
 
+    // table columns and their associated TableCellViews have the same identifier
     private let fromIdentifier = NSUserInterfaceItemIdentifier(rawValue: "From")
     private let toIdentifier = NSUserInterfaceItemIdentifier(rawValue: "To")
     private let caseSensitiveIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CaseSensitive")
