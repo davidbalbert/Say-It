@@ -87,10 +87,10 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     // table columns and their associated TableCellViews have the same identifier
-    private let fromIdentifier = NSUserInterfaceItemIdentifier(rawValue: "From")
-    private let toIdentifier = NSUserInterfaceItemIdentifier(rawValue: "To")
-    private let caseSensitiveIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CaseSensitive")
-    private let testIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Test")
+    private static let fromIdentifier = NSUserInterfaceItemIdentifier(rawValue: "From")
+    private static let toIdentifier = NSUserInterfaceItemIdentifier(rawValue: "To")
+    private static let caseSensitiveIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CaseSensitive")
+    private static let testIdentifier = NSUserInterfaceItemIdentifier(rawValue: "Test")
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let p = Defaults.pronunciations[row]
@@ -103,11 +103,11 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
             return nil
         }
 
-        if tableColumn.identifier == fromIdentifier {
+        if tableColumn.identifier == PronunciationsViewController.fromIdentifier {
             cell.textField?.stringValue = p.from
-        } else if tableColumn.identifier == toIdentifier {
+        } else if tableColumn.identifier == PronunciationsViewController.toIdentifier {
             cell.textField?.stringValue = p.to
-        } else if tableColumn.identifier == caseSensitiveIdentifier, let cell = cell as? ButtonTableCellView {
+        } else if tableColumn.identifier == PronunciationsViewController.caseSensitiveIdentifier, let cell = cell as? ButtonTableCellView {
             cell.button.state = p.caseSensitive ? .on : .off
         }
 
