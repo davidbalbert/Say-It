@@ -8,9 +8,7 @@
 
 import Cocoa
 
-class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate {
-
-    @IBOutlet var textField: NSTextField!
+class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
     @IBOutlet var rateSlider: NSSlider!
     @IBOutlet var rateTextField: NSTextField!
     @IBOutlet var testButton: NSButton!
@@ -25,17 +23,13 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     var speaking = false {
         didSet {
             if speaking {
-                textField.isEnabled = false
                 rateSlider.isEnabled = false
                 rateTextField.isEnabled = false
                 testButton.title = "Stop"
-                testButton.action = #selector(stopSpeaking(_:))
             } else {
-                textField.isEnabled = true
                 rateSlider.isEnabled = true
                 rateTextField.isEnabled = true
                 testButton.title = "Test"
-                testButton.action = #selector(speakTextfieldContents(_:))
 
             }
         }
@@ -49,8 +43,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
                 rate = maxRate
             }
 
-            rateSlider.intValue = Int32(rate)
-            rateTextField.intValue = Int32(rate)
+            rateSlider.integerValue = rate
+            rateTextField.objectValue = rate
         }
     }
 
@@ -60,6 +54,9 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         rate = appDelegate.speaker.rate
         rateSlider.minValue = Double(minRate)
         rateSlider.maxValue = Double(maxRate)
+
+//        let formatter = WPMFormatter()
+//        rateTextField.formatter = formatter
     }
 
     override func viewWillAppear() {
@@ -84,21 +81,25 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     }
 
     @IBAction func updateRate(_ sender: NSControl) {
-        rate = Int(sender.intValue)
+        rate = sender.integerValue
+        Defaults.rate = rate
+    }
 
-        guard let event = NSApp.currentEvent else { return }
-
-        if event.type != .leftMouseDown && event.type != .leftMouseDragged {
-            Defaults.rate = rate
+    func controlTextDidEndEditing(_ obj: Notification) {
+        print("what")
+        // Async call is necessary to make the text field actually resign first respodner.
+        // Not sure why. See more: https://forums.developer.apple.com/thread/104773
+        DispatchQueue.main.async {
+            self.view.window?.makeFirstResponder(nil)
         }
     }
 
-    @IBAction func speakTextfieldContents(_ sender: NSButton) {
-        appDelegate.speaker.startSpeaking(textField.stringValue)
-    }
-
-    @IBAction func stopSpeaking(_ sender: NSButton) {
-        appDelegate.speaker.stopSpeaking()
+    @IBAction func testRate(_ sender: NSButton) {
+        if !speaking {
+            appDelegate.speaker.startSpeaking("Hello, I'm your computer")
+        } else {
+            appDelegate.speaker.stopSpeaking()
+        }
     }
 
     @IBAction func toggleDockIcon(_ sender: Any) {
