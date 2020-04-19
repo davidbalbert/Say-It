@@ -56,9 +56,7 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
 
         let label = NSTextField(labelWithString: text)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.controlSize = .mini
-        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
-        label.alignment = .center
+        label.font = NSFont.systemFont(ofSize: 10) // Matches the size of the labels in Energy Saver prefs
 
         slider.superview?.addSubview(label)
 
