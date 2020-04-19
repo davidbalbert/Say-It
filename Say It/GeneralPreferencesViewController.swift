@@ -13,6 +13,12 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     @IBOutlet var testButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
 
+    // This constrait is only used to make IB happy at design time. When the
+    // code is running, we constrain the bottom of the tick mark labels to be
+    // less than the bottom of the superview.
+    @IBOutlet var speedSliderBottomConstraint: NSLayoutConstraint!
+
+
     var speakerBeginId: UUID!
     var speakerCompletionId: UUID!
 
@@ -37,6 +43,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     }
 
     func labelTickMarks() {
+        speedSliderBottomConstraint.isActive = false
+
         labelTickMark(0, of: speedSlider, withText: "0.5x")
         labelTickMark(1, of: speedSlider, withText: "1x")
         labelTickMark(3, of: speedSlider, withText: "2x")
@@ -58,6 +66,7 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
 
         label.centerXAnchor.constraint(equalTo: slider.leadingAnchor, constant: r.minX).isActive = true
         label.topAnchor.constraint(equalTo: slider.topAnchor, constant: r.minY+r.height+3).isActive = true
+        label.superview?.bottomAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor).isActive = true
     }
 
     override func viewWillAppear() {

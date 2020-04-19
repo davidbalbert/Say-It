@@ -493,10 +493,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="495" height="121"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="KSS-Uv-MaY">
-                                <rect key="frame" x="122" y="58" width="251" height="43"/>
+                                <rect key="frame" x="122" y="72" width="251" height="29"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sng-jC-gbi">
-                                        <rect key="frame" x="-2" y="25" width="47" height="16"/>
+                                        <rect key="frame" x="-2" y="11" width="47" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Speed:" id="FvM-Mi-clp">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -504,7 +504,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcw-rr-vYs">
-                                        <rect key="frame" x="49" y="13" width="204" height="24"/>
+                                        <rect key="frame" x="49" y="-1" width="204" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="kHd-cO-gmm"/>
                                         </constraints>
@@ -515,7 +515,7 @@
                                     </slider>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="rcw-rr-vYs" secondAttribute="bottom" constant="14" id="LLJ-4O-YTl"/>
+                                    <constraint firstAttribute="bottom" secondItem="rcw-rr-vYs" secondAttribute="bottom" id="LLJ-4O-YTl"/>
                                     <constraint firstItem="Sng-jC-gbi" firstAttribute="top" secondItem="KSS-Uv-MaY" secondAttribute="top" constant="2" id="VHm-ni-ZsW"/>
                                     <constraint firstItem="Sng-jC-gbi" firstAttribute="leading" secondItem="KSS-Uv-MaY" secondAttribute="leading" id="clB-wV-Wbt"/>
                                     <constraint firstAttribute="trailing" secondItem="rcw-rr-vYs" secondAttribute="trailing" id="ehL-Hj-LWY"/>
@@ -556,6 +556,7 @@
                     <connections>
                         <outlet property="dockCheckbox" destination="G9r-0Q-BAN" id="hRa-Jo-Zab"/>
                         <outlet property="speedSlider" destination="rcw-rr-vYs" id="cDV-tt-k1j"/>
+                        <outlet property="speedSliderBottomConstraint" destination="LLJ-4O-YTl" id="1h0-s2-69J"/>
                         <outlet property="testButton" destination="XBQ-zC-pPB" id="un9-mx-osa"/>
                     </connections>
                 </viewController>
