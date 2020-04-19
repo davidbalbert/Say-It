@@ -9,54 +9,55 @@
 import Cocoa
 
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
-    @IBOutlet var rateSlider: NSSlider!
-    @IBOutlet var rateTextField: NSTextField!
+    @IBOutlet var speedSlider: NSSlider!
     @IBOutlet var testButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
 
     var speakerBeginId: UUID!
     var speakerCompletionId: UUID!
 
-    let minRate: Int = 100
-    let maxRate: Int = 800
-
     var speaking = false {
         didSet {
             if speaking {
-                rateSlider.isEnabled = false
-                rateTextField.isEnabled = false
+                speedSlider.isEnabled = false
                 testButton.title = "Stop"
             } else {
-                rateSlider.isEnabled = true
-                rateTextField.isEnabled = true
+                speedSlider.isEnabled = true
                 testButton.title = "Test"
-
             }
         }
     }
 
-    var rate: Int! {
-        didSet {
-            if rate < minRate {
-                rate = minRate
-            } else if rate > maxRate {
-                rate = maxRate
-            }
-
-            rateSlider.integerValue = rate
-            rateTextField.objectValue = rate
-        }
-    }
+    var rate: Int = Defaults.rate
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        rate = appDelegate.speaker.rate
-        rateSlider.minValue = Double(minRate)
-        rateSlider.maxValue = Double(maxRate)
+        labelTickMarks()
+    }
 
-//        let formatter = WPMFormatter()
-//        rateTextField.formatter = formatter
+    func labelTickMarks() {
+        labelTickMark(0, of: speedSlider, withText: "0.5x")
+        labelTickMark(1, of: speedSlider, withText: "1x")
+        labelTickMark(3, of: speedSlider, withText: "2x")
+        labelTickMark(5, of: speedSlider, withText: "3x")
+    }
+
+    func labelTickMark(_ i: Int, of slider: NSSlider, withText text: String) {
+        guard i < slider.numberOfTickMarks else { return }
+
+        let label = NSTextField(labelWithString: text)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.controlSize = .mini
+        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
+        label.alignment = .center
+
+        slider.superview?.addSubview(label)
+
+        let r = slider.rectOfTickMark(at: i)
+
+        label.centerXAnchor.constraint(equalTo: slider.leadingAnchor, constant: r.minX).isActive = true
+        label.topAnchor.constraint(equalTo: slider.topAnchor, constant: r.minY+r.height+3).isActive = true
     }
 
     override func viewWillAppear() {

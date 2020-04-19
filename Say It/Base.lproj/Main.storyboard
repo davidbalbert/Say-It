@@ -493,50 +493,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="495" height="121"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="KSS-Uv-MaY">
-                                <rect key="frame" x="89" y="72" width="318" height="29"/>
+                                <rect key="frame" x="122" y="58" width="251" height="43"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sng-jC-gbi">
-                                        <rect key="frame" x="-2" y="11" width="36" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Rate:" id="FvM-Mi-clp">
+                                        <rect key="frame" x="-2" y="25" width="47" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Speed:" id="FvM-Mi-clp">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rcw-rr-vYs">
-                                        <rect key="frame" x="38" y="-1" width="204" height="24"/>
+                                        <rect key="frame" x="49" y="13" width="204" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="kHd-cO-gmm"/>
                                         </constraints>
-                                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="100" maxValue="600" doubleValue="450" tickMarkPosition="below" numberOfTickMarks="6" sliderType="linear" id="BjA-j0-V7P"/>
+                                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="88" maxValue="528" doubleValue="176" tickMarkPosition="below" numberOfTickMarks="6" sliderType="linear" id="BjA-j0-V7P"/>
                                         <connections>
                                             <action selector="updateRate:" target="XfG-lQ-9wD" id="JNn-LZ-a91"/>
                                         </connections>
                                     </slider>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QWf-84-tc6">
-                                        <rect key="frame" x="248" y="8" width="70" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="YgB-Hx-i7y"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" title="XXX WPM" drawsBackground="YES" id="6gZ-Lg-OSQ">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="updateRate:" target="XfG-lQ-9wD" id="sd4-Jk-6fX"/>
-                                            <outlet property="delegate" destination="XfG-lQ-9wD" id="9OM-n9-eqp"/>
-                                        </connections>
-                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="QWf-84-tc6" firstAttribute="top" secondItem="KSS-Uv-MaY" secondAttribute="top" id="3fj-uS-3x6"/>
-                                    <constraint firstItem="QWf-84-tc6" firstAttribute="leading" secondItem="rcw-rr-vYs" secondAttribute="trailing" constant="8" symbolic="YES" id="68G-uD-Ue1"/>
-                                    <constraint firstAttribute="bottom" secondItem="rcw-rr-vYs" secondAttribute="bottom" id="LLJ-4O-YTl"/>
+                                    <constraint firstAttribute="bottom" secondItem="rcw-rr-vYs" secondAttribute="bottom" constant="14" id="LLJ-4O-YTl"/>
+                                    <constraint firstItem="Sng-jC-gbi" firstAttribute="top" secondItem="KSS-Uv-MaY" secondAttribute="top" constant="2" id="VHm-ni-ZsW"/>
                                     <constraint firstItem="Sng-jC-gbi" firstAttribute="leading" secondItem="KSS-Uv-MaY" secondAttribute="leading" id="clB-wV-Wbt"/>
+                                    <constraint firstAttribute="trailing" secondItem="rcw-rr-vYs" secondAttribute="trailing" id="ehL-Hj-LWY"/>
                                     <constraint firstItem="rcw-rr-vYs" firstAttribute="firstBaseline" secondItem="Sng-jC-gbi" secondAttribute="firstBaseline" id="fbP-Nv-EVL"/>
-                                    <constraint firstAttribute="trailing" secondItem="QWf-84-tc6" secondAttribute="trailing" id="h5z-Ud-OwZ"/>
-                                    <constraint firstItem="QWf-84-tc6" firstAttribute="firstBaseline" secondItem="Sng-jC-gbi" secondAttribute="firstBaseline" id="tco-Q4-W00"/>
                                     <constraint firstItem="rcw-rr-vYs" firstAttribute="leading" secondItem="Sng-jC-gbi" secondAttribute="trailing" constant="8" symbolic="YES" id="z4L-CD-6cN"/>
                                 </constraints>
                             </customView>
@@ -572,8 +555,7 @@
                     </view>
                     <connections>
                         <outlet property="dockCheckbox" destination="G9r-0Q-BAN" id="hRa-Jo-Zab"/>
-                        <outlet property="rateSlider" destination="rcw-rr-vYs" id="cDV-tt-k1j"/>
-                        <outlet property="rateTextField" destination="QWf-84-tc6" id="2wd-Tk-SRV"/>
+                        <outlet property="speedSlider" destination="rcw-rr-vYs" id="cDV-tt-k1j"/>
                         <outlet property="testButton" destination="XBQ-zC-pPB" id="un9-mx-osa"/>
                     </connections>
                 </viewController>
