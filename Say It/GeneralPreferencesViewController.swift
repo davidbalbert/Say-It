@@ -8,8 +8,38 @@
 
 import Cocoa
 
+private func sliderValueToSpeed(_ v: Double) -> Double {
+    if v < 1 {
+        return 1/4*v + 3/4
+    } else if v < 7 {
+        return 1/6*v + 5/6
+    } else {
+        return 1/2*v - 3/2
+    }
+}
+
+private func speedToSliderValue(_ s: Double) -> Double {
+    if s < 0.75 {
+        return 4*s - 3
+    } else if s < 2 {
+        return 6*s - 5
+    } else {
+        return 2*s + 3
+    }
+}
+
+private func speedToWpm(_ s: Double) -> Int {
+    Int(s * 225)
+}
+
+private func wpmToSpeed(_ rate: Int) -> Double {
+    Double(rate)/225
+}
+
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
     @IBOutlet var speedSlider: NSSlider!
+    @IBOutlet var speedLabel: NSTextField!
+    @IBOutlet var speedFormatter: NumberFormatter!
     @IBOutlet var testButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
 
@@ -34,10 +64,21 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         }
     }
 
-    var rate: Int = Defaults.rate
+    var speed = 1.0 {
+        didSet {
+            speedLabel.doubleValue = speed
+            speedSlider.doubleValue = speedToSliderValue(speed)
+            Defaults.rate = speedToWpm(speed)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        speed = wpmToSpeed(Defaults.rate)
+        speedFormatter.maximumFractionDigits = 2
+        speedFormatter.minimumFractionDigits = 0
+        speedFormatter.positiveSuffix = "x"
 
         labelTickMarks()
     }
@@ -45,10 +86,9 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     func labelTickMarks() {
         speedSliderBottomConstraint.isActive = false
 
-        labelTickMark(0, of: speedSlider, withText: "0.5x")
         labelTickMark(1, of: speedSlider, withText: "1x")
-        labelTickMark(3, of: speedSlider, withText: "2x")
-        labelTickMark(5, of: speedSlider, withText: "3x")
+        labelTickMark(7, of: speedSlider, withText: "2x")
+        labelTickMark(9, of: speedSlider, withText: "3x")
     }
 
     func labelTickMark(_ i: Int, of slider: NSSlider, withText text: String) {
@@ -88,9 +128,19 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
     }
 
-    @IBAction func updateRate(_ sender: NSControl) {
-        rate = sender.integerValue
-        Defaults.rate = rate
+
+    @IBAction func updateRate(_ sender: NSSlider) {
+        speed = sliderValueToSpeed(sender.doubleValue)
+
+        guard let event = NSApp.currentEvent else {
+            return
+        }
+
+        if event.type == .leftMouseDown {
+            speedLabel.isHidden = false
+        } else if event.type == .leftMouseUp {
+            speedLabel.isHidden = true
+        }
     }
 
     func controlTextDidEndEditing(_ obj: Notification) {

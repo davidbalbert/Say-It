@@ -13,7 +13,7 @@ struct Defaults {
         get {
             let r = UserDefaults.standard.integer(forKey: "rate")
 
-            return r == 0 ? 175 : r // 175 is NSSpeechSynthesizer().rate
+            return r == 0 ? 225 : r
         }
 
         set {
