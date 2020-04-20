@@ -28,7 +28,7 @@ private func speedToSliderValue(_ s: Double) -> Double {
     }
 }
 
-private func speedToWpm(_ s: Double) -> Int {
+private func speedToWPM(_ s: Double) -> Int {
     Int(s * 225)
 }
 
@@ -38,7 +38,7 @@ private func wpmToSpeed(_ rate: Int) -> Double {
 
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
     @IBOutlet var speedSlider: NSSlider!
-    @IBOutlet var speedLabel: NSTextField!
+    @IBOutlet var rateLabel: NSTextField!
     @IBOutlet var speedFormatter: NumberFormatter!
     @IBOutlet var testButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
@@ -66,9 +66,11 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
 
     var speed = 1.0 {
         didSet {
-            speedLabel.doubleValue = speed
+            let rate = speedToWPM(speed)
+
+            rateLabel.stringValue = "\(rate) WPM"
             speedSlider.doubleValue = speedToSliderValue(speed)
-            Defaults.rate = speedToWpm(speed)
+            Defaults.rate = rate
         }
     }
 
@@ -76,9 +78,6 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         super.viewDidLoad()
 
         speed = wpmToSpeed(Defaults.rate)
-        speedFormatter.maximumFractionDigits = 2
-        speedFormatter.minimumFractionDigits = 0
-        speedFormatter.positiveSuffix = "x"
 
         labelTickMarks()
     }
@@ -137,9 +136,9 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         }
 
         if event.type == .leftMouseDown {
-            speedLabel.isHidden = false
+            rateLabel.isHidden = false
         } else if event.type == .leftMouseUp {
-            speedLabel.isHidden = true
+            rateLabel.isHidden = true
         }
     }
 
