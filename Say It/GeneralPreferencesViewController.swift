@@ -39,7 +39,6 @@ private func wpmToSpeed(_ rate: Int) -> Double {
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
     @IBOutlet var speedSlider: NSSlider!
     @IBOutlet var rateLabel: NSTextField!
-    @IBOutlet var speedFormatter: NumberFormatter!
     @IBOutlet var testButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
 
@@ -51,6 +50,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
 
     var speakerBeginId: UUID!
     var speakerCompletionId: UUID!
+
+    var speedFormatter = NumberFormatter()
 
     var speaking = false {
         didSet {
@@ -68,8 +69,13 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         didSet {
             let rate = speedToWPM(speed)
 
-            rateLabel.stringValue = "\(rate) WPM"
+            let description = "\(speedFormatter.string(from: NSNumber(value: speed)) ?? "?")x (\(rate) WPM)"
+
+            rateLabel.stringValue = description
+
+            speedSlider.toolTip = description
             speedSlider.doubleValue = speedToSliderValue(speed)
+
             Defaults.rate = rate
         }
     }
@@ -78,6 +84,9 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         super.viewDidLoad()
 
         speed = wpmToSpeed(Defaults.rate)
+
+        speedFormatter.minimumFractionDigits = 0
+        speedFormatter.maximumFractionDigits = 2
 
         labelTickMarks()
     }
