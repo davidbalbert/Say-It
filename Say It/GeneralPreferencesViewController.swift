@@ -9,22 +9,22 @@
 import Cocoa
 
 private func sliderValueToSpeed(_ v: Double) -> Double {
-    if v < 1 {
-        return 1/4*v + 3/4
-    } else if v < 7 {
-        return 1/6*v + 5/6
+    if v < 10 {
+        return 1/40*v + 3/4
+    } else if v < 70 {
+        return 1/60*v + 5/6
     } else {
-        return 1/2*v - 3/2
+        return 1/20*v - 3/2
     }
 }
 
 private func speedToSliderValue(_ s: Double) -> Double {
     if s < 0.75 {
-        return 4*s - 3
+        return 40*s - 30
     } else if s < 2 {
-        return 6*s - 5
+        return 60*s - 50
     } else {
-        return 2*s + 3
+        return 20*s + 30
     }
 }
 
@@ -72,9 +72,7 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
             let description = "\(speedFormatter.string(from: NSNumber(value: speed)) ?? "?")x (\(rate) WPM)"
 
             rateLabel.stringValue = description
-
             speedSlider.toolTip = description
-            speedSlider.doubleValue = speedToSliderValue(speed)
 
             Defaults.rate = rate
         }
@@ -83,10 +81,11 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        speed = wpmToSpeed(Defaults.rate)
-
         speedFormatter.minimumFractionDigits = 0
         speedFormatter.maximumFractionDigits = 2
+
+        speed = wpmToSpeed(Defaults.rate)
+        speedSlider.doubleValue = speedToSliderValue(speed)
 
         labelTickMarks()
     }
