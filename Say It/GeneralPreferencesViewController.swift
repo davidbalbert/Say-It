@@ -39,7 +39,7 @@ private func wpmToSpeed(_ rate: Int) -> Double {
 class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
     @IBOutlet var speedSlider: NSSlider!
     @IBOutlet var rateLabel: NSTextField!
-    @IBOutlet var testButton: NSButton!
+    @IBOutlet var playButton: NSButton!
     @IBOutlet var dockCheckbox: NSButton!
 
     // This constrait is only used to make IB happy at design time. When the
@@ -57,10 +57,10 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
         didSet {
             if speaking {
                 speedSlider.isEnabled = false
-                testButton.title = "Stop"
+                playButton.title = "Stop"
             } else {
                 speedSlider.isEnabled = true
-                testButton.title = "Play"
+                playButton.title = "Play"
             }
         }
     }
