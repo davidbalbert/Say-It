@@ -54,11 +54,11 @@ class StatusMenuController: NSObject, NSMenuDelegate {
 
     deinit {
         if let beginHandlerId = beginHandlerId {
-            appDelegate.speaker.removeBeginHandler(beginHandlerId)
+            AppDelegate.shared.speaker.removeBeginHandler(beginHandlerId)
         }
 
         if let completionHandlerId = completionHandlerId {
-            appDelegate.speaker.removeCompletionHandler(completionHandlerId)
+            AppDelegate.shared.speaker.removeCompletionHandler(completionHandlerId)
         }
     }
 

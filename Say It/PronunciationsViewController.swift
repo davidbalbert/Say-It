@@ -42,24 +42,24 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        speakerBeginId = appDelegate.speaker.addBeginHandler { [weak self] in
+        speakerBeginId = AppDelegate.shared.speaker.addBeginHandler { [weak self] in
             self?.speaking = true
         }
 
-        speakerCompletionId = appDelegate.speaker.addCompletionHandler { [weak self] in
+        speakerCompletionId = AppDelegate.shared.speaker.addCompletionHandler { [weak self] in
             self?.speaking = false
         }
 
 
         setVisibilityForAllButtons()
-        speaking = appDelegate.speaker.isSpeaking
+        speaking = AppDelegate.shared.speaker.isSpeaking
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        appDelegate.speaker.removeBeginHandler(speakerBeginId)
-        appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
+        AppDelegate.shared.speaker.removeBeginHandler(speakerBeginId)
+        AppDelegate.shared.speaker.removeCompletionHandler(speakerCompletionId)
     }
 
     func setEnabledForAllButtons(_ enabled: Bool) {
@@ -344,8 +344,8 @@ class PronunciationsViewController: NSViewController, NSTableViewDelegate, NSTab
         let row = tableView.row(for: sender)
         let p = Defaults.pronunciations[row]
 
-        // Use speaker.startSpeaking rather than appDelegate.startSpeaking
+        // Use speaker.startSpeaking rather than AppDelegate.shared.startSpeaking
         // to skip adding to the transcript.
-        appDelegate.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
+        AppDelegate.shared.speaker.startSpeaking("\(p.from). \(p.to).", withoutSubstitutingPronunciations: true)
     }
 }

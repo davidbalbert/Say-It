@@ -117,11 +117,11 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        speakerBeginId = appDelegate.speaker.addBeginHandler { [weak self] in
+        speakerBeginId = AppDelegate.shared.speaker.addBeginHandler { [weak self] in
             self?.speaking = true
         }
 
-        speakerCompletionId = appDelegate.speaker.addCompletionHandler { [weak self] in
+        speakerCompletionId = AppDelegate.shared.speaker.addCompletionHandler { [weak self] in
             self?.speaking = false
         }
 
@@ -131,8 +131,8 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
     override func viewWillDisappear() {
         super.viewWillDisappear()
         
-        appDelegate.speaker.removeBeginHandler(speakerBeginId)
-        appDelegate.speaker.removeCompletionHandler(speakerCompletionId)
+        AppDelegate.shared.speaker.removeBeginHandler(speakerBeginId)
+        AppDelegate.shared.speaker.removeCompletionHandler(speakerCompletionId)
     }
 
 
@@ -152,9 +152,9 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
 
     @IBAction func testRate(_ sender: NSButton) {
         if !speaking {
-            appDelegate.speaker.startSpeaking("Hello, I'm your computer")
+            AppDelegate.shared.speaker.startSpeaking("Hello, I'm your computer")
         } else {
-            appDelegate.speaker.stopSpeaking()
+            AppDelegate.shared.speaker.stopSpeaking()
         }
     }
 

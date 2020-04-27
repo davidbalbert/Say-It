@@ -9,8 +9,6 @@
 import Cocoa
 import ServiceManagement
 
-var appDelegate: AppDelegate!
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCListenerDelegate, SpeakerService {
     @IBOutlet var statusMenuController: StatusMenuController!
@@ -30,9 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCL
         }
     }
 
-    override init() {
-        super.init()
-        appDelegate = self
+    static var shared: AppDelegate {
+        NSApp.delegate as! AppDelegate
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
