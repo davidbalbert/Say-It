@@ -60,7 +60,7 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
                 testButton.title = "Stop"
             } else {
                 speedSlider.isEnabled = true
-                testButton.title = "Test"
+                testButton.title = "Play"
             }
         }
     }
@@ -147,15 +147,6 @@ class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDel
             rateLabel.isHidden = false
         } else if event.type == .leftMouseUp {
             rateLabel.isHidden = true
-        }
-    }
-
-    func controlTextDidEndEditing(_ obj: Notification) {
-        print("what")
-        // Async call is necessary to make the text field actually resign first respodner.
-        // Not sure why. See more: https://forums.developer.apple.com/thread/104773
-        DispatchQueue.main.async {
-            self.view.window?.makeFirstResponder(nil)
         }
     }
 
