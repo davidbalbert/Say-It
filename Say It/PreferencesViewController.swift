@@ -58,7 +58,7 @@ class PreferencesViewController: NSTabViewController {
         oldView.isHidden = true
         newView.isHidden = true
 
-        view.window?.setFrame(newFrame, display: false, animate: true)
+        window.setFrame(newFrame, display: false, animate: true)
     }
 
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
