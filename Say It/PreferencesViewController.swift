@@ -29,7 +29,15 @@ class PreferencesViewController: NSTabViewController {
             return
         }
 
-        sizeWindowContentToContent(of: view, animate: false)
+        guard let window = view.window else {
+            return
+        }
+
+        guard let frame = frame(of: window, for: view) else {
+            return
+        }
+
+        view.window?.setFrame(frame, display: false)
     }
 
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
@@ -42,7 +50,15 @@ class PreferencesViewController: NSTabViewController {
         oldView.isHidden = true
         newView.isHidden = true
 
-        sizeWindowContentToContent(of: newView, animate: true)
+        guard let window = view.window else {
+            return
+        }
+
+        guard let newFrame = frame(of: window, for: newView) else {
+            return
+        }
+
+        view.window?.setFrame(newFrame, display: false, animate: true)
     }
 
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
@@ -57,19 +73,17 @@ class PreferencesViewController: NSTabViewController {
         }
     }
 
-    func sizeWindowContentToContent(of newView: NSView, animate: Bool) {
-        guard let window = view.window else {
-            return
-        }
-
-        let contentSize = newView.fittingSize
-        let newWindowSize = window.frameRect(forContentRect: NSRect(origin: NSPoint.zero, size: contentSize)).size
+    func frame(of window: NSWindow, for view: NSView) -> NSRect? {
+        let contentSize = view.fittingSize
+        let newFrame = window.frameRect(forContentRect: NSRect(origin: .zero, size: contentSize))
+        let oldFrame = window.frame
+        let newSize = newFrame.size
+        let oldSize = oldFrame.size
 
         var frame = window.frame
-        frame.origin.y += frame.size.height
-        frame.origin.y -= newWindowSize.height
-        frame.size = newWindowSize
+        frame.size = newSize
+        frame.origin.y -= (newSize.height - oldSize.height)
 
-        window.setFrame(frame, display: false, animate: animate)
+        return frame
     }
 }
