@@ -13,11 +13,13 @@ class PreferencesViewController: NSTabViewController {
         // Super.viewDidLoad() selects tabIndex 0, which will overwrite
         // our saved preference. Load the preference, then call super,
         // and finally, restore the preference.
-        let i = Defaults.selectedPreferenceTabIndex
+        let identifier = Defaults.selectedPreferenceTabIdentifier
 
         super.viewDidLoad()
 
-        if (i < tabViewItems.count) {
+
+        let i = tabView.indexOfTabViewItem(withIdentifier: identifier as Any)
+        if i != NSNotFound {
             selectedTabViewItemIndex = i
         }
     }
@@ -47,7 +49,7 @@ class PreferencesViewController: NSTabViewController {
             return
         }
 
-        Defaults.selectedPreferenceTabIndex = selectedTabViewItemIndex
+        Defaults.selectedPreferenceTabIdentifier = tabViewItem?.identifier as? String
         tabView.isHidden = true
 
         NSAnimationContext.runAnimationGroup { context in

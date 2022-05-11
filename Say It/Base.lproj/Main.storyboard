@@ -359,7 +359,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="324" minWidth="40" maxWidth="1000" id="Mut-fW-bAz">
+                                                <tableColumn width="295" minWidth="40" maxWidth="1000" id="Mut-fW-bAz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Text">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -372,11 +372,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="TextCell" id="Nud-P0-Bek">
-                                                            <rect key="frame" x="118" y="1" width="328" height="17"/>
+                                                            <rect key="frame" x="118" y="1" width="299" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="E36-1A-CHy">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="328" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="299" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="GpC-r6-Bzy"/>
                                                                     </constraints>
@@ -740,7 +740,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="Test" width="78" minWidth="10" maxWidth="3.4028234663852886e+38" id="kTn-rT-BwC">
+                                                <tableColumn identifier="Test" width="49" minWidth="10" maxWidth="3.4028234663852886e+38" id="kTn-rT-BwC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -753,7 +753,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="Test" id="bSt-oS-7ZD" customClass="ButtonTableCellView" customModule="Say_It" customModuleProvider="target">
-                                                            <rect key="frame" x="354" y="1" width="82" height="17"/>
+                                                            <rect key="frame" x="354" y="1" width="53" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PR1-a3-Zv1">
@@ -835,8 +835,8 @@
             <objects>
                 <tabViewController tabStyle="toolbar" id="7v9-MM-lDm" customClass="PreferencesViewController" customModule="Say_It" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem image="NSPreferencesGeneral" id="Y0F-UO-PsE"/>
-                        <tabViewItem image="PronunciationsToolbarImage" id="Ggv-dB-mNx"/>
+                        <tabViewItem identifier="General" image="NSPreferencesGeneral" id="Y0F-UO-PsE"/>
+                        <tabViewItem identifier="Pronounciations" image="PronunciationsToolbarImage" id="Ggv-dB-mNx"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions"/>
                     <tabView key="tabView" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="boC-mg-B5r">

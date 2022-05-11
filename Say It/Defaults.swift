@@ -31,17 +31,15 @@ struct Defaults {
         }
     }
 
-    static var selectedPreferenceTabIndex: Int {
+    static var selectedPreferenceTabIdentifier: String? {
         get {
-            // Returns 0 if it's unset, which is fine with us
-            return UserDefaults.standard.integer(forKey: "selectedPreferenceTabIndex")
+            UserDefaults.standard.string(forKey: "selectedPreferenceTabIdentifier")
         }
 
         set {
-            UserDefaults.standard.set(newValue, forKey: "selectedPreferenceTabIndex")
+            UserDefaults.standard.set(newValue, forKey: "selectedPreferenceTabIdentifier")
         }
     }
-
 
     private static var _pronunciations: [Pronunciation]?
 
