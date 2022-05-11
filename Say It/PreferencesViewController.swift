@@ -25,11 +25,7 @@ class PreferencesViewController: NSTabViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        guard let view = tabView.selectedTabViewItem?.view else {
-            return
-        }
-
-        guard let window = view.window else {
+        guard let window = view.window, let view = tabView.selectedTabViewItem?.view else {
             return
         }
 
@@ -37,39 +33,28 @@ class PreferencesViewController: NSTabViewController {
             return
         }
 
-        view.window?.setFrame(frame, display: false)
-    }
-
-    override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-        super.tabView(tabView, willSelect: tabViewItem)
-
-        guard let window = view.window else {
-            return
-        }
-
-        guard let oldView = tabView.selectedTabViewItem?.view, let newView = tabViewItem?.view  else {
-            return
-        }
-
-        guard let newFrame = frame(of: window, for: newView) else {
-            return
-        }
-
-        oldView.isHidden = true
-        newView.isHidden = true
-
-        window.setFrame(newFrame, display: false, animate: true)
+        window.setFrame(frame, display: false)
     }
 
     override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, didSelect: tabViewItem)
 
-        tabViewItem?.view?.isHidden = false
+        guard let window = view.window, let newView = tabViewItem?.view else {
+            return
+        }
+
+        guard let frame = frame(of: window, for: newView) else {
+            return
+        }
 
         Defaults.selectedPreferenceTabIndex = selectedTabViewItemIndex
+        tabView.isHidden = true
 
-        if let title = title {
-            view.window?.title = title
+        NSAnimationContext.runAnimationGroup { context in
+            window.animator().setFrame(frame, display: false)
+        } completionHandler: {
+            tabView.isHidden = false
+            window.title = self.title ?? "Preferences"
         }
     }
 
