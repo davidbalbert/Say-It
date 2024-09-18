@@ -36,7 +36,7 @@ private func wpmToSpeed(_ rate: Int) -> Double {
     Double(rate)/225
 }
 
-class GeneralPreferencesViewController: NSViewController, NSSpeechSynthesizerDelegate, NSTextFieldDelegate {
+class GeneralPreferencesViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var speedSlider: NSSlider!
     @IBOutlet var rateLabel: NSTextField!
     @IBOutlet var playButton: NSButton!

@@ -9,7 +9,7 @@
 import Cocoa
 import ServiceManagement
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation, NSXPCListenerDelegate, SpeakerService {
     @IBOutlet var statusMenuController: StatusMenuController!
     var preferencesWindowController: NSWindowController!

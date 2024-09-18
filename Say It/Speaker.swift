@@ -7,79 +7,84 @@
 //
 
 import Cocoa
+import AVFoundation
 
-class Speaker : NSObject, NSSpeechSynthesizerDelegate {
-    var synth: NSSpeechSynthesizer?
+import os
 
-    var skipCompletionHandlersInSynthCallback = false
+final class Speaker: NSObject, AVSpeechSynthesizerDelegate, Sendable {
+    struct State {
+        let synth: AVSpeechSynthesizer
+        var beginHandlers: [UUID: () -> Void] = [:]
+        var completionHandlers: [UUID: () -> Void] = [:]
+    }
 
-    var beginHandlers: [UUID: () -> Void] = [:]
-    var completionHandlers: [UUID: () -> Void] = [:]
-
+    let state: OSAllocatedUnfairLock<State>
     var rate: Int {
         get {
             return Defaults.rate
         }
     }
 
+    override init() {
+        self.state = .init(initialState: .init(synth: AVSpeechSynthesizer()))
+        super.init()
+
+        state.withLock {
+            $0.synth.delegate = self
+        }
+    }
+
     @objc var isSpeaking: Bool {
-        return synth?.isSpeaking ?? false
+        state.withLock {
+            $0.synth.isSpeaking
+        }
     }
 
     func addBeginHandler(_ handler: @escaping () -> Void) -> UUID {
         let id = UUID()
-        beginHandlers[id] = handler
-
+        state.withLock {
+            $0.beginHandlers[id] = handler
+        }
         return id
     }
 
     func removeBeginHandler(_ id: UUID) {
-        beginHandlers.removeValue(forKey: id)
+        state.withLock {
+            _ = $0.beginHandlers.removeValue(forKey: id)
+        }
     }
 
     func addCompletionHandler(_ handler: @escaping () -> Void) -> UUID {
         let id = UUID()
-        completionHandlers[id] = handler
+
+        state.withLock {
+            $0.completionHandlers[id] = handler
+        }
 
         return id
     }
 
     func removeCompletionHandler(_ id: UUID) {
-        completionHandlers.removeValue(forKey: id)
+        state.withLock {
+            _ = $0.completionHandlers.removeValue(forKey: id)
+        }
     }
 
     func startSpeaking(_ s: String, withoutSubstitutingPronunciations skipSubstitute: Bool = false) {
-        if let synth = synth, synth.isSpeaking {
-            // speechSynthesizer:didFinishSpeaking: seems to get called asynchronously
-            // after we return to the run loop. That would mean if we start speaking
-            // when we're already speaking, the order of callbacks would be like this:
-            //
-            // begin
-            // begin
-            // completion (immediately after begin)
-            // completion
-            //
-            // to avoid this, and get the right order (begin, completion, begin,
-            // completion), we skip the completion handlers in the callback and run
-            // them inline here.
-            skipCompletionHandlersInSynthCallback = true
-            synth.stopSpeaking()
-            runCompletionHandlers()
-        }
+        state.withLock {
+            if $0.synth.isSpeaking {
+                $0.synth.stopSpeaking(at: .immediate)
+            }
 
-        let synth = NSSpeechSynthesizer()
-        synth.delegate = self
-        synth.rate = Float(Defaults.rate)
-        self.synth = synth
-
-        beginHandlers.values.forEach { handler in
-            handler()
-        }
-
-        if (skipSubstitute) {
-            synth.startSpeaking(s)
-        } else {
-            synth.startSpeaking(substitutePronunciations(s))
+            let u: AVSpeechUtterance
+            if (skipSubstitute) {
+                u = AVSpeechUtterance(string: s)
+            } else {
+                u = AVSpeechUtterance(string: substitutePronunciations(s))
+            }
+            print("?", AVSpeechUtteranceMinimumSpeechRate, AVSpeechUtteranceDefaultSpeechRate, AVSpeechUtteranceMaximumSpeechRate)
+            u.rate = 0.7
+            $0.synth.speak(u)
         }
     }
 
@@ -98,22 +103,26 @@ class Speaker : NSObject, NSSpeechSynthesizerDelegate {
     }
 
     func stopSpeaking() {
-        synth?.stopSpeaking()
-        synth = nil
-    }
-
-    func speechSynthesizer(_ sender: NSSpeechSynthesizer, didFinishSpeaking finishedSpeaking: Bool) {
-        if skipCompletionHandlersInSynthCallback {
-            skipCompletionHandlersInSynthCallback = false
-            return
+        state.withLock {
+            _ = $0.synth.stopSpeaking(at: .immediate)
         }
-
-        runCompletionHandlers()
     }
 
-    func runCompletionHandlers() {
-        completionHandlers.values.forEach { handler in
-            handler()
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        print("didStart")
+        state.withLock {
+            for handler in $0.beginHandlers.values {
+                handler()
+            }
+        }
+    }
+
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        print("didFinish")
+        state.withLock {
+            for handler in $0.completionHandlers.values {
+                handler()
+            }
         }
     }
 }
