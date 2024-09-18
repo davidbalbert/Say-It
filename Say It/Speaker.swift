@@ -18,6 +18,8 @@ final class Speaker: NSObject, AVSpeechSynthesizerDelegate, Sendable {
         var completionHandlers: [UUID: () -> Void] = [:]
     }
 
+    let voice: AVSpeechSynthesisVoice?
+
     let state: OSAllocatedUnfairLock<State>
     var rate: Int {
         get {
@@ -27,6 +29,9 @@ final class Speaker: NSObject, AVSpeechSynthesizerDelegate, Sendable {
 
     override init() {
         self.state = .init(initialState: .init(synth: AVSpeechSynthesizer()))
+        self.voice = AVSpeechSynthesisVoice.speechVoices().first {
+            $0.language == AVSpeechSynthesisVoice.currentLanguageCode() && $0.gender == .male && ($0.quality == .enhanced || $0.quality == .premium)
+        }
         super.init()
 
         state.withLock {
@@ -83,7 +88,9 @@ final class Speaker: NSObject, AVSpeechSynthesizerDelegate, Sendable {
                 u = AVSpeechUtterance(string: substitutePronunciations(s))
             }
             print("?", AVSpeechUtteranceMinimumSpeechRate, AVSpeechUtteranceDefaultSpeechRate, AVSpeechUtteranceMaximumSpeechRate)
-            u.rate = 0.7
+
+            u.rate = 0.65
+            u.voice = voice
             $0.synth.speak(u)
         }
     }
